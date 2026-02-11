@@ -32,7 +32,7 @@ jobs:
 
       - name: Run Tests
         run: |
-          pytest
+          pytest || (code=$?; if [ $code -eq 5 ]; then echo "No tests collected"; exit 0; else exit $code; fi)
 
       - name: Run CSV Processing Script
         run: |

@@ -50,7 +50,7 @@ jobs:
 
       - name: Run Tests
         run: |
-          pytest || (code=$?; if [ $code -eq 5 ]; then echo "No tests collected"; exit 0; else exit $code; fi)
+          python -m pytest --cov=src --cov-report=term-missing || (code=$?; if [ $code -eq 5 ]; then echo "No tests collected"; exit 0; else exit $code; fi)
 
       - name: Clean Output Directory
         run: rm -rf output

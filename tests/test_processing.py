@@ -1,4 +1,5 @@
 import pandas as pd
+import pytest
 
 from src.processing import (
     create_visual_summary,
@@ -67,7 +68,9 @@ def test_create_visual_summary_and_correlation_outputs():
 
     summary = create_visual_summary(df)
     corr = generate_correlation_matrix(df)
-    assert "mean" in summary.index
+    assert summary.startswith("<svg")
+    assert "Visual Summary" in summary
+    assert "mean" in summary.lower()
     assert corr is not None
     assert list(corr.columns) == ["A", "B"]
 
@@ -75,3 +78,20 @@ def test_create_visual_summary_and_correlation_outputs():
 def test_generate_correlation_matrix_returns_none_with_single_numeric_column():
     df = pd.DataFrame({"A": [1, 2, 3], "Label": ["x", "y", "z"]})
     assert generate_correlation_matrix(df) is None
+
+
+@pytest.mark.parametrize(
+    "func",
+    [
+        prepare_chart_ready_data,
+        export_plot_dataset,
+        generate_trend_dataset,
+        format_for_dashboard,
+        create_visual_summary,
+        generate_correlation_matrix,
+    ],
+)
+@pytest.mark.parametrize("invalid_df", [None, [], {"A": [1, 2]}, "bad_input", 7])
+def test_processing_functions_raise_type_error_for_invalid_input(func, invalid_df):
+    with pytest.raises(TypeError, match="pandas DataFrame"):
+        func(invalid_df)

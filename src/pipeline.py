@@ -47,9 +47,12 @@ def format_for_dashboard(df, output_dir):
 
 
 def create_visual_summary_csv(df, output_dir):
-    """Generate summary statistics CSV."""
-    summary = create_visual_summary(df)
-    save_file(summary, "05_summary.csv", output_dir, include_index=True)
+    """Generate summary statistics image (SVG)."""
+    summary_svg = create_visual_summary(df)
+    output_path = os.path.join(output_dir, "05_summary.svg")
+    with open(output_path, "w", encoding="utf-8") as svg_file:
+        svg_file.write(summary_svg)
+    print(f"Saved: {output_path}")
 
 
 def generate_correlation_matrix(df, output_dir):

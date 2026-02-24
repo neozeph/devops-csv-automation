@@ -1,25 +1,7 @@
 try:
-    from src.pipeline import (
-        create_visual_summary_csv,
-        export_plot_dataset,
-        format_for_dashboard,
-        generate_correlation_matrix,
-        generate_trend_dataset,
-        prepare_chart_ready_data,
-        run_pipeline,
-        save_file,
-    )
+    from src.pipeline import run_pipeline
 except ModuleNotFoundError:
-    from pipeline import (
-        create_visual_summary_csv,
-        export_plot_dataset,
-        format_for_dashboard,
-        generate_correlation_matrix,
-        generate_trend_dataset,
-        prepare_chart_ready_data,
-        run_pipeline,
-        save_file,
-    )
+    from pipeline import run_pipeline
 
 # Configuration
 INPUT_DIR = "input"

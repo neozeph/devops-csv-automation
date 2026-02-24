@@ -59,6 +59,17 @@ jobs:
         run: |
           python src/main.py
 
+      - name: Validate Visual Summary
+        id: validate
+        run: |
+          python src/validate.py
+
+      - name: Notify Validation Failure
+        if: failure() && steps.validate.outcome == 'failure'
+        run: |
+          echo "::error::Visual Summary Validation Failed! Please check the logs."
+          # Example for Slack/Discord: curl -X POST -H 'Content-type: application/json' --data '{"text":"Validation failed!"}' ${{ secrets.WEBHOOK_URL }}
+
       - name: Commit and Push Changes
         if: github.event_name == 'push'
         run: |

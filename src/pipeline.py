@@ -7,7 +7,6 @@ try:
         create_visual_summary,
         export_plot_dataset as build_plot_dataset,
         format_for_dashboard as build_dashboard_dataset,
-        generate_correlation_matrix as build_correlation_matrix,
         generate_trend_dataset as build_trend_dataset,
         prepare_chart_ready_data as build_chart_ready_dataset,
     )
@@ -16,7 +15,6 @@ except ModuleNotFoundError:
         create_visual_summary,
         export_plot_dataset as build_plot_dataset,
         format_for_dashboard as build_dashboard_dataset,
-        generate_correlation_matrix as build_correlation_matrix,
         generate_trend_dataset as build_trend_dataset,
         prepare_chart_ready_data as build_chart_ready_dataset,
     )
@@ -55,13 +53,6 @@ def create_visual_summary_csv(df, output_dir):
     print(f"Saved: {output_path}")
 
 
-def generate_correlation_matrix(df, output_dir):
-    """Generate numeric correlation matrix when enough numeric columns exist."""
-    corr_matrix = build_correlation_matrix(df)
-    if corr_matrix is not None:
-        save_file(corr_matrix, "06_correlation.csv", output_dir, include_index=True)
-
-
 def save_file(df, filename, output_dir, include_index=False):
     """Helper to save a dataframe to the output directory."""
     output_path = os.path.join(output_dir, filename)
@@ -93,6 +84,5 @@ def run_pipeline(input_dir, output_dir):
             generate_trend_dataset(df, file_output_dir)
             format_for_dashboard(df, file_output_dir)
             create_visual_summary_csv(df, file_output_dir)
-            generate_correlation_matrix(df, file_output_dir)
         except Exception as exc:
             print(f"Failed to process {filename}: {exc}")

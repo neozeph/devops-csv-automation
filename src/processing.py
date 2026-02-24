@@ -47,15 +47,6 @@ def create_visual_summary(df):
     return _dashboard_svg(df, df_numeric)
 
 
-def generate_correlation_matrix(df):
-    """Return correlation matrix for numeric columns when possible."""
-    _ensure_dataframe(df)
-    df_numeric = df.select_dtypes(include=["number"])
-    if df_numeric.shape[1] > 1:
-        return df_numeric.corr()
-    return None
-
-
 def _dashboard_svg(df, df_numeric):
     """Render a dashboard-style summary with charts and rounded cards."""
     width = 1200
@@ -365,8 +356,14 @@ def _kpi_icon(icon_name, cx, cy, color):
             ),
         ]
     return [
-        f'<line x1="{cx - 10}" y1="{cy}" x2="{cx - 2}" y2="{cy + 8}" stroke="{color}" stroke-width="2.8" stroke-linecap="round"/>',
-        f'<line x1="{cx - 2}" y1="{cy + 8}" x2="{cx + 12}" y2="{cy - 10}" stroke="{color}" stroke-width="2.8" stroke-linecap="round"/>',
+        (
+            f'<line x1="{cx - 10}" y1="{cy}" x2="{cx - 2}" y2="{cy + 8}" '
+            f'stroke="{color}" stroke-width="2.8" stroke-linecap="round"/>'
+        ),
+        (
+            f'<line x1="{cx - 2}" y1="{cy + 8}" x2="{cx + 12}" y2="{cy - 10}" '
+            f'stroke="{color}" stroke-width="2.8" stroke-linecap="round"/>'
+        ),
     ]
 
 
@@ -386,8 +383,14 @@ def _quick_metric_icon(x, y, index):
     color = colors[index % len(colors)]
     return [
         f'<circle cx="{x}" cy="{y}" r="11" fill="{color}" opacity="0.18"/>',
-        f'<line x1="{x - 5}" y1="{y + 2}" x2="{x}" y2="{y - 3}" stroke="{color}" stroke-width="2.4" stroke-linecap="round"/>',
-        f'<line x1="{x}" y1="{y - 3}" x2="{x + 5}" y2="{y + 1}" stroke="{color}" stroke-width="2.4" stroke-linecap="round"/>',
+        (
+            f'<line x1="{x - 5}" y1="{y + 2}" x2="{x}" y2="{y - 3}" '
+            f'stroke="{color}" stroke-width="2.4" stroke-linecap="round"/>'
+        ),
+        (
+            f'<line x1="{x}" y1="{y - 3}" x2="{x + 5}" y2="{y + 1}" '
+            f'stroke="{color}" stroke-width="2.4" stroke-linecap="round"/>'
+        ),
     ]
 
 
@@ -396,14 +399,23 @@ def _quick_stat_icon(kind, cx, cy):
     if kind == "mean":
         return [
             f'<circle cx="{cx}" cy="{cy}" r="8.5" fill="#22d3ee" opacity="0.22"/>',
-            f'<line x1="{cx - 5}" y1="{cy}" x2="{cx + 5}" y2="{cy}" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"/>',
+            (
+                f'<line x1="{cx - 5}" y1="{cy}" x2="{cx + 5}" y2="{cy}" '
+                'stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"/>'
+            ),
         ]
     if kind == "min":
         return [
             f'<circle cx="{cx}" cy="{cy}" r="8.5" fill="#34d399" opacity="0.22"/>',
-            f'<polyline points="{cx - 5},{cy - 1} {cx},{cy + 4} {cx + 5},{cy - 4}" fill="none" stroke="#34d399" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>',
+            (
+                f'<polyline points="{cx - 5},{cy - 1} {cx},{cy + 4} {cx + 5},{cy - 4}" '
+                'fill="none" stroke="#34d399" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>'
+            ),
         ]
     return [
         f'<circle cx="{cx}" cy="{cy}" r="8.5" fill="#f59e0b" opacity="0.22"/>',
-        f'<polyline points="{cx - 5},{cy + 4} {cx},{cy - 4} {cx + 5},{cy + 1}" fill="none" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>',
+        (
+            f'<polyline points="{cx - 5},{cy + 4} {cx},{cy - 4} {cx + 5},{cy + 1}" '
+            'fill="none" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>'
+        ),
     ]

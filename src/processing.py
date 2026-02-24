@@ -69,13 +69,15 @@ def _dashboard_svg(df, df_numeric):
     if df.size:
         completeness = max(0.0, ((df.size - missing_cells) / df.size) * 100)
 
-    summary_df = df_numeric.describe().round(2) if not df_numeric.empty else pd.DataFrame()
+    summary_df = (
+        df_numeric.describe().round(2) if not df_numeric.empty else pd.DataFrame()
+    )
 
     svg = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
         'font-family="Poppins, Segoe UI, Arial, sans-serif">',
         (
-            '<defs>'
+            "<defs>"
             '<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">'
             '<stop offset="0%" stop-color="#060b17"/>'
             '<stop offset="100%" stop-color="#111b30"/>'
@@ -254,12 +256,10 @@ def _dashboard_svg(df, df_numeric):
         f'<text x="{pad + 20}" y="{bottom_y + 34}" font-size="20" font-weight="600" fill="#e2e8f0">'
         "Quick Stats</text>"
     )
-    svg.append(
-        f'<circle cx="{pad + 28}" cy="{bottom_y + 54}" r="4" fill="#f59e0b"/>'
-    )
+    svg.append(f'<circle cx="{pad + 28}" cy="{bottom_y + 54}" r="4" fill="#f59e0b"/>')
     svg.append(
         f'<text x="{pad + 40}" y="{bottom_y + 58}" font-size="13" fill="#94a3b8">'
-        f'Missing Cells: {missing_cells}</text>'
+        f"Missing Cells: {missing_cells}</text>"
     )
 
     if not summary_df.empty:
@@ -269,9 +269,15 @@ def _dashboard_svg(df, df_numeric):
         col_w = (width - (pad * 2) - 40) / max(1, len(stats_cols))
         for i, col_name in enumerate(stats_cols):
             x = start_x + (i * col_w)
-            mean_val = summary_df.at["mean", col_name] if "mean" in summary_df.index else "n/a"
-            min_val = summary_df.at["min", col_name] if "min" in summary_df.index else "n/a"
-            max_val = summary_df.at["max", col_name] if "max" in summary_df.index else "n/a"
+            mean_val = (
+                summary_df.at["mean", col_name] if "mean" in summary_df.index else "n/a"
+            )
+            min_val = (
+                summary_df.at["min", col_name] if "min" in summary_df.index else "n/a"
+            )
+            max_val = (
+                summary_df.at["max", col_name] if "max" in summary_df.index else "n/a"
+            )
             svg.append(
                 f'<rect x="{x:.2f}" y="{start_y - 26}" width="{col_w - 12:.2f}" height="122" rx="14" '
                 'fill="#0a1528" stroke="#2a3a56"/>'
@@ -286,7 +292,11 @@ def _dashboard_svg(df, df_numeric):
             inner_w = col_w - 42
             stat_w = inner_w / 3
             stat_y = start_y + 22
-            stats = [("Mean", mean_val, "mean"), ("Min", min_val, "min"), ("Max", max_val, "max")]
+            stats = [
+                ("Mean", mean_val, "mean"),
+                ("Min", min_val, "min"),
+                ("Max", max_val, "max"),
+            ]
             for stat_idx, (label, value, kind) in enumerate(stats):
                 sx = inner_x + (stat_idx * stat_w)
                 svg.extend(_quick_stat_icon(kind, sx + 12, stat_y - 5))

@@ -2,12 +2,11 @@ import os
 import shutil
 import pytest
 import pandas as pd
-from src.main import (
+from src.pipeline import (
     prepare_chart_ready_data,
     format_for_dashboard,
-    INPUT_DIR,
-    OUTPUT_DIR,
 )
+from src.main import INPUT_DIR, OUTPUT_DIR
 
 
 # Setup and Teardown

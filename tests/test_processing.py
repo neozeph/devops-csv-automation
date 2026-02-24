@@ -5,7 +5,6 @@ from src.processing import (
     create_visual_summary,
     export_plot_dataset,
     format_for_dashboard,
-    generate_correlation_matrix,
     generate_trend_dataset,
     prepare_chart_ready_data,
 )
@@ -57,7 +56,7 @@ def test_format_for_dashboard_normalizes_column_names():
     assert list(result.columns) == ["sales_amount", "region_name"]
 
 
-def test_create_visual_summary_and_correlation_outputs():
+def test_create_visual_summary_output():
     df = pd.DataFrame(
         {
             "A": [1, 2, 3, 4],
@@ -67,17 +66,9 @@ def test_create_visual_summary_and_correlation_outputs():
     )
 
     summary = create_visual_summary(df)
-    corr = generate_correlation_matrix(df)
     assert summary.startswith("<svg")
     assert "Visual Summary" in summary
     assert "mean" in summary.lower()
-    assert corr is not None
-    assert list(corr.columns) == ["A", "B"]
-
-
-def test_generate_correlation_matrix_returns_none_with_single_numeric_column():
-    df = pd.DataFrame({"A": [1, 2, 3], "Label": ["x", "y", "z"]})
-    assert generate_correlation_matrix(df) is None
 
 
 @pytest.mark.parametrize(
@@ -88,7 +79,6 @@ def test_generate_correlation_matrix_returns_none_with_single_numeric_column():
         generate_trend_dataset,
         format_for_dashboard,
         create_visual_summary,
-        generate_correlation_matrix,
     ],
 )
 @pytest.mark.parametrize("invalid_df", [None, [], {"A": [1, 2]}, "bad_input", 7])

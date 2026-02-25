@@ -10001,5 +10001,3 @@ studentid,name,subject,grade
 10000,Student_10000,Math,3.0
 1,Student_1,Math,95.0
 2,Student_2,Science,85.0
-10001,,Math,90.0
-10002,Student_10002,Science,

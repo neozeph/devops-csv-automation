@@ -8,8 +8,8 @@ from src.processing import (
     create_visual_summary,
 )
 
-
 # --- 1. Functional & Negative Testing ---
+
 
 def test_prepare_chart_ready_data_empty():
     """Test with an empty DataFrame."""
@@ -63,6 +63,7 @@ def test_format_for_dashboard_special_chars():
 
 
 # --- 2. Edge Case Testing ---
+
 
 def test_edge_case_single_row():
     """Test processing with a single row."""

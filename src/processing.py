@@ -154,7 +154,12 @@ def _dashboard_svg(df, df_numeric):
 
         for i, (name, val) in enumerate(means.items()):
             x = bar_area_x + (i * bar_slot) + ((bar_slot - bar_w) / 2)
-            h = (float(val) / max_mean) * (bar_area_h - 8)
+
+            val_float = float(val)
+            if val_float != val_float:  # Check for NaN
+                val_float = 0.0
+
+            h = (val_float / max_mean) * (bar_area_h - 8)
             y = bar_area_y + bar_area_h - h
             svg.append(
                 f'<rect x="{x:.2f}" y="{y:.2f}" width="{bar_w:.2f}" height="{h:.2f}" rx="9" '

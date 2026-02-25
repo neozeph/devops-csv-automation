@@ -2,20 +2,30 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+We currently support the latest version of the project deployed to the `main` branch.
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| 1.0.x   | :white_check_mark: |
+| < 1.0   | :x:                |
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+We take the security of our software seriously. If you believe you have found a security vulnerability in the **DevOps CSV Automation** project, please report it to us as described below.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+**Please do not report security vulnerabilities through public GitHub issues.**
+
+### How to Report
+
+1.  Email the project maintainers at **security@example.com**.
+2.  Include a detailed description of the vulnerability.
+3.  Steps to reproduce the issue.
+
+### Response Timeline
+
+*   You can expect an acknowledgment of your report within **48 hours**.
+*   We will provide a status update within **1 week**.
+
+### Security Tools Used
+
+This project utilizes automated security tools (Bandit, Safety) in its CI/CD pipeline to ensure code quality and dependency safety.

@@ -13,10 +13,10 @@ def test_pipeline_handles_corrupt_csv(mock_read_csv, mock_glob, capsys):
     # Setup: Mock finding one file, but reading it raises an error
     mock_glob.return_value = ["input/corrupt.csv"]
     mock_read_csv.side_effect = Exception("Corrupt file format")
-    
+
     # Run
     run_pipeline("input", "output")
-    
+
     # Verify: Check that the error was logged to stdout
     captured = capsys.readouterr()
     assert "Failed to process corrupt.csv: Corrupt file format" in captured.out

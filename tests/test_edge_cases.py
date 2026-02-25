@@ -45,18 +45,14 @@ def test_generate_trend_dataset_no_date():
 
 def test_generate_trend_dataset_garbage_date():
     """Test with a 'date' column that contains garbage (should not crash)."""
-    df = pd.DataFrame(
-        {"date_col": ["not-a-date", "still-not-a-date"], "val": [1, 2]}
-    )
+    df = pd.DataFrame({"date_col": ["not-a-date", "still-not-a-date"], "val": [1, 2]})
     # Should catch ValueError internally and return original df without sorting/converting
     result = generate_trend_dataset(df)
     pd.testing.assert_frame_equal(result, df)
 
 def test_format_for_dashboard_special_chars():
     """Test column normalization with special characters."""
-    df = pd.DataFrame(
-        {" User @ Name ": ["Alice"], "# ID": [1], "Plan ($)": [100]}
-    )
+    df = pd.DataFrame({" User @ Name ": ["Alice"], "# ID": [1], "Plan ($)": [100]})
     result = format_for_dashboard(df)
     expected_cols = ["user_@_name", "#_id", "plan_($)"]
     assert list(result.columns) == expected_cols

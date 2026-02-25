@@ -1,5 +1,4 @@
 from unittest.mock import patch
-
 from src.pipeline import run_pipeline
 
 

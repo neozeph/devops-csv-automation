@@ -25,7 +25,12 @@ def test_prepare_chart_ready_data_all_null():
 
 def test_export_plot_dataset_no_numeric():
     """Test with a DataFrame containing no numeric columns."""
-    df = pd.DataFrame({"A": ["a", "b"], "B": [pd.Timestamp("2023-01-01"), pd.Timestamp("2023-01-02")]})
+    df = pd.DataFrame(
+        {
+            "A": ["a", "b"],
+            "B": [pd.Timestamp("2023-01-01"), pd.Timestamp("2023-01-02")],
+        }
+    )
     result = export_plot_dataset(df)
     assert result.empty
     assert len(result.columns) == 0
@@ -39,7 +44,9 @@ def test_generate_trend_dataset_no_date():
 
 def test_generate_trend_dataset_garbage_date():
     """Test with a 'date' column that contains garbage (should not crash)."""
-    df = pd.DataFrame({"date_col": ["not-a-date", "still-not-a-date"], "val": [1, 2]})
+    df = pd.DataFrame(
+        {"date_col": ["not-a-date", "still-not-a-date"], "val": [1, 2]}
+    )
     # Should catch ValueError internally and return original df without sorting/converting
     result = generate_trend_dataset(df)
     pd.testing.assert_frame_equal(result, df)

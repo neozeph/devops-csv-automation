@@ -6,7 +6,7 @@ from src.pipeline import run_pipeline
 @patch("src.pipeline.pd.read_csv")
 def test_pipeline_handles_corrupt_csv(mock_read_csv, mock_glob, capsys):
     """
-    Negative Testing: Ensure pipeline catches errors for corrupt files 
+    Negative Testing: Ensure pipeline catches errors for corrupt files
     and continues or exits gracefully without crashing the script.
     """
     # Setup: Mock finding one file, but reading it raises an error

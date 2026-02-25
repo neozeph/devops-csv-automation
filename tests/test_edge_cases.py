@@ -9,6 +9,7 @@ from src.processing import (
     create_visual_summary,
 )
 
+
 # --- 1. Functional & Negative Testing ---
 
 def test_prepare_chart_ready_data_empty():

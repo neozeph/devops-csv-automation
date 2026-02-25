@@ -2,6 +2,7 @@ import pytest
 from unittest.mock import patch
 from src.pipeline import run_pipeline
 
+
 @patch("src.pipeline.glob.glob")
 @patch("src.pipeline.pd.read_csv")
 def test_pipeline_handles_corrupt_csv(mock_read_csv, mock_glob, capsys):

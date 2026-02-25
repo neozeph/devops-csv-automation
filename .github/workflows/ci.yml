@@ -84,7 +84,7 @@ jobs:
           fi
 
       - name: Upload Processed Data
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: processed-data
           path: output/

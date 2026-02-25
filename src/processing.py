@@ -68,24 +68,16 @@ def _dashboard_svg(df, df_numeric):
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
         'font-family="Poppins, Segoe UI, Arial, sans-serif">',
         (
-            "<defs>"
-            '<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">'
-            '<stop offset="0%" stop-color="#060b17"/>'
-            '<stop offset="100%" stop-color="#111b30"/>'
-            "</linearGradient>"
-            '<linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">'
-            '<stop offset="0%" stop-color="#2dd4bf"/>'
-            '<stop offset="100%" stop-color="#0ea5e9"/>'
-            "</linearGradient>"
-            "</defs>"
+            '<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">'
+            '<stop offset="0%" stop-color="#060b17"/><stop offset="100%" stop-color="#111b30"/>'
+            '</linearGradient><linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">'
+            '<stop offset="0%" stop-color="#2dd4bf"/><stop offset="100%" stop-color="#0ea5e9"/>'
+            "</linearGradient></defs>"
         ),
         f'<rect width="{width}" height="{height}" fill="url(#bg)"/>',
         '<circle cx="1080" cy="60" r="160" fill="#22d3ee" opacity="0.08"/>',
         '<circle cx="980" cy="20" r="120" fill="#34d399" opacity="0.07"/>',
-        (
-            f'<text x="{pad}" y="{pad + 10}" font-size="34" font-weight="700" fill="#f8fafc">'
-            "Visual Summary Dashboard</text>"
-        ),
+        f'<text x="{pad}" y="{pad + 10}" font-size="34" font-weight="700" fill="#f8fafc">Visual Summary Dashboard</text>',
         (
             f'<text x="{pad}" y="{pad + 40}" font-size="15" fill="#94a3b8">'
             "Automated Profile for Incoming CSV Data</text>"
@@ -152,13 +144,22 @@ def _dashboard_svg(df, df_numeric):
         bar_area_y = top_y + 58
         bar_area_w = left_w - 84
         bar_area_h = panel_h - 96
-        max_mean = float(means.max()) if float(means.max()) != 0 else 1.0
+
+        # Fix: Handle case where means.max() is NaN (all data is null)
+        raw_max = float(means.max())
+        max_mean = raw_max if (raw_max != 0 and raw_max == raw_max) else 1.0
+
         bar_slot = bar_area_w / max(1, len(means))
         bar_w = min(58, bar_slot * 0.62)
 
         for i, (name, val) in enumerate(means.items()):
             x = bar_area_x + (i * bar_slot) + ((bar_slot - bar_w) / 2)
-            h = (float(val) / max_mean) * (bar_area_h - 8)
+
+            val_float = float(val)
+            if val_float != val_float:  # Check for NaN
+                val_float = 0.0
+
+            h = (val_float / max_mean) * (bar_area_h - 8)
             y = bar_area_y + bar_area_h - h
             svg.append(
                 f'<rect x="{x:.2f}" y="{y:.2f}" width="{bar_w:.2f}" height="{h:.2f}" rx="9" '
@@ -350,10 +351,7 @@ def _kpi_icon(icon_name, cx, cy, color):
                 f'<rect x="{cx - 2}" y="{cy - 7}" width="7" height="17" rx="2.2" '
                 f'fill="{color}" opacity="0.8"/>'
             ),
-            (
-                f'<rect x="{cx + 7}" y="{cy - 13}" width="7" height="23" rx="2.2" '
-                f'fill="{color}" opacity="0.65"/>'
-            ),
+            f'<rect x="{cx + 7}" y="{cy - 13}" width="7" height="23" rx="2.2" fill="{color}" opacity="0.65"/>',
         ]
     return [
         (
@@ -387,10 +385,7 @@ def _quick_metric_icon(x, y, index):
             f'<line x1="{x - 5}" y1="{y + 2}" x2="{x}" y2="{y - 3}" '
             f'stroke="{color}" stroke-width="2.4" stroke-linecap="round"/>'
         ),
-        (
-            f'<line x1="{x}" y1="{y - 3}" x2="{x + 5}" y2="{y + 1}" '
-            f'stroke="{color}" stroke-width="2.4" stroke-linecap="round"/>'
-        ),
+        f'<line x1="{x}" y1="{y - 3}" x2="{x + 5}" y2="{y + 1}" stroke="{color}" stroke-width="2.4" stroke-linecap="round"/>',
     ]
 
 
@@ -409,13 +404,15 @@ def _quick_stat_icon(kind, cx, cy):
             f'<circle cx="{cx}" cy="{cy}" r="8.5" fill="#34d399" opacity="0.22"/>',
             (
                 f'<polyline points="{cx - 5},{cy - 1} {cx},{cy + 4} {cx + 5},{cy - 4}" '
-                'fill="none" stroke="#34d399" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>'
+                'fill="none" stroke="#34d399" stroke-width="2.4" stroke-linecap="round" '
+                'stroke-linejoin="round"/>'
             ),
         ]
     return [
         f'<circle cx="{cx}" cy="{cy}" r="8.5" fill="#f59e0b" opacity="0.22"/>',
         (
             f'<polyline points="{cx - 5},{cy + 4} {cx},{cy - 4} {cx + 5},{cy + 1}" '
-            'fill="none" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>'
+            'fill="none" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round" '
+            'stroke-linejoin="round"/>'
         ),
     ]

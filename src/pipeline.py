@@ -24,6 +24,7 @@ def prepare_chart_ready_data(df, output_dir):
     """Clean missing values and write chart-ready data."""
     df_clean = build_chart_ready_dataset(df)
     save_file(df_clean, "01_chart_ready.csv", output_dir)
+    return df_clean
 
 
 def export_plot_dataset(df, output_dir):
@@ -79,10 +80,10 @@ def run_pipeline(input_dir, output_dir):
             file_output_dir = os.path.join(output_dir, file_stem)
             os.makedirs(file_output_dir, exist_ok=True)
 
-            prepare_chart_ready_data(df, file_output_dir)
-            export_plot_dataset(df, file_output_dir)
-            generate_trend_dataset(df, file_output_dir)
-            format_for_dashboard(df, file_output_dir)
+            df_clean = prepare_chart_ready_data(df, file_output_dir)
+            export_plot_dataset(df_clean, file_output_dir)
+            generate_trend_dataset(df_clean, file_output_dir)
+            format_for_dashboard(df_clean, file_output_dir)
             create_visual_summary_csv(df, file_output_dir)
         except Exception as exc:
             print(f"Failed to process {filename}: {exc}")

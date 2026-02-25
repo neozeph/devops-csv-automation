@@ -2,6 +2,7 @@ import glob
 import os
 import sys
 import pandas as pd
+import defusedxml.ElementTree as ET
 
 
 def validate_visual_summary(df, output_dir):
@@ -10,16 +11,24 @@ def validate_visual_summary(df, output_dir):
     if not os.path.exists(svg_path):
         raise FileNotFoundError(f"Validation failed: {svg_path} not found.")
 
-    with open(svg_path, "r", encoding="utf-8") as f:
-        content = f.read()
+    try:
+        tree = ET.parse(svg_path)
+        root = tree.getroot()
+    except ET.ParseError as e:
+        raise ValueError(f"Validation failed: Invalid SVG format. Error: {e}")
+
+    # SVG namespace handling
+    ns = {"svg": "http://www.w3.org/2000/svg"}
+    # Extract all text content from the SVG
+    text_elements = [elem.text for elem in root.findall(".//svg:text", ns) if elem.text]
 
     rows_count = len(df)
-    if f">{rows_count}</text>" not in content:
+    if str(rows_count) not in text_elements:
         raise ValueError(f"Validation failed: Row count {rows_count} not found in SVG.")
 
     df_numeric = df.select_dtypes(include=["number"])
     num_cols = len(df_numeric.columns)
-    if f">{num_cols}</text>" not in content:
+    if str(num_cols) not in text_elements:
         raise ValueError(
             f"Validation failed: Numeric column count {num_cols} not found in SVG."
         )
@@ -30,7 +39,7 @@ def validate_visual_summary(df, output_dir):
         completeness = max(0.0, ((df.size - missing_cells) / df.size) * 100)
 
     comp_str = f"{completeness:.1f}%"
-    if comp_str not in content:
+    if comp_str not in text_elements:
         raise ValueError(
             f"Validation failed: Completeness {comp_str} not found in SVG."
         )

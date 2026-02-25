@@ -152,7 +152,11 @@ def _dashboard_svg(df, df_numeric):
         bar_area_y = top_y + 58
         bar_area_w = left_w - 84
         bar_area_h = panel_h - 96
-        max_mean = float(means.max()) if float(means.max()) != 0 else 1.0
+        
+        # Fix: Handle case where means.max() is NaN (all data is null)
+        raw_max = float(means.max())
+        max_mean = raw_max if (raw_max != 0 and raw_max == raw_max) else 1.0
+        
         bar_slot = bar_area_w / max(1, len(means))
         bar_w = min(58, bar_slot * 0.62)
 

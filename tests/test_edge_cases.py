@@ -54,7 +54,9 @@ def test_generate_trend_dataset_garbage_date():
 
 def test_format_for_dashboard_special_chars():
     """Test column normalization with special characters."""
-    df = pd.DataFrame({" User @ Name ": ["Alice"], "# ID": [1], "Plan ($)": [100]})
+    df = pd.DataFrame(
+        {" User @ Name ": ["Alice"], "# ID": [1], "Plan ($)": [100]}
+    )
     result = format_for_dashboard(df)
     expected_cols = ["user_@_name", "#_id", "plan_($)"]
     assert list(result.columns) == expected_cols

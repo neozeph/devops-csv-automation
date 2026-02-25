@@ -341,8 +341,14 @@ def _kpi_icon(icon_name, cx, cy, color):
                 f'<rect x="{cx - 10}" y="{cy - 10}" width="20" height="20" rx="3.5" '
                 f'fill="none" stroke="{color}" stroke-width="2.4"/>'
             ),
-            f'<line x1="{cx - 10}" y1="{cy - 2}" x2="{cx + 10}" y2="{cy - 2}" stroke="{color}" stroke-width="2.4"/>',
-            f'<line x1="{cx - 10}" y1="{cy + 5}" x2="{cx + 10}" y2="{cy + 5}" stroke="{color}" stroke-width="2.4"/>',
+            (
+                f'<line x1="{cx - 10}" y1="{cy - 2}" x2="{cx + 10}" y2="{cy - 2}" '
+                f'stroke="{color}" stroke-width="2.4"/>'
+            ),
+            (
+                f'<line x1="{cx - 10}" y1="{cy + 5}" x2="{cx + 10}" y2="{cy + 5}" '
+                f'stroke="{color}" stroke-width="2.4"/>'
+            ),
         ]
     if icon_name == "columns":
         return [
@@ -412,14 +418,16 @@ def _quick_stat_icon(kind, cx, cy):
         return [
             f'<circle cx="{cx}" cy="{cy}" r="8.5" fill="#34d399" opacity="0.22"/>',
             (
-                f'<polyline points="{cx - 5},{cy - 1} {cx},{cy + 4} {cx + 5},{cy - 4}" '
-                'fill="none" stroke="#34d399" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>'
+                f'<polyline points="{cx - 5},{cy - 1} {cx},{cy + 4} {cx + 5},{cy - 4}"'
+                ' fill="none" stroke="#34d399" stroke-width="2.4" stroke-linecap="round"'
+                ' stroke-linejoin="round"/>'
             ),
         ]
     return [
         f'<circle cx="{cx}" cy="{cy}" r="8.5" fill="#f59e0b" opacity="0.22"/>',
         (
-            f'<polyline points="{cx - 5},{cy + 4} {cx},{cy - 4} {cx + 5},{cy + 1}" '
-            'fill="none" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>'
+            f'<polyline points="{cx - 5},{cy + 4} {cx},{cy - 4} {cx + 5},{cy + 1}"'
+            ' fill="none" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"'
+            ' stroke-linejoin="round"/>'
         ),
     ]

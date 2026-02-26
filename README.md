@@ -111,13 +111,15 @@ Cleans the raw dataset to ensure it is ready for visualization by removing missi
 **Output:**
 DataFrame with missing values (NaN) removed. The output DataFrame is a cleaned version of the input, ready for charting and visualization without errors due to missing data points.
 
-### `format_for_dashboard(df)`
+
+### `export_plot_dataset(csv_file)`
 **Purpose:**
-Standardizes column names for compatibility with dashboard tools by converting them to lowercase and replacing spaces with underscores. Dashboard tools often have specific requirements for column naming conventions. This function ensures that the column names in the DataFrame adhere to these standards, making it easier to integrate the data with various dashboard platforms.
+Exports a dataset to a CSV file, presumably for plotting or further analysis.
 **Input:**
-`df` (pandas DataFrame): Data with arbitrary column names. The input DataFrame represents the data after initial cleaning but before dashboard-specific formatting.
+`csv_file` (string): The path to the CSV file to be exported.
 **Output:**
-DataFrame with normalized headers. The output DataFrame has column names that are lowercase and use underscores instead of spaces, making it compatible with most dashboard tools and improving data accessibility.
+None. This function writes data to a file but does not return any value.
+
 
 ### `generate_trend_dataset(df)`
 **Purpose:**
@@ -127,6 +129,23 @@ Prepares data for time-series trend analysis by sorting the DataFrame by date. T
 **Output:**
 DataFrame sorted by the date column. The output DataFrame is sorted in ascending order of date, making it suitable for time-series analysis and trend visualization.
 
+
+### `format_for_dashboard(df)`
+**Purpose:**
+Standardizes column names for compatibility with dashboard tools by converting them to lowercase and replacing spaces with underscores. Dashboard tools often have specific requirements for column naming conventions. This function ensures that the column names in the DataFrame adhere to these standards, making it easier to integrate the data with various dashboard platforms.
+**Input:**
+`df` (pandas DataFrame): Data with arbitrary column names. The input DataFrame represents the data after initial cleaning but before dashboard-specific formatting.
+**Output:**
+DataFrame with normalized headers. The output DataFrame has column names that are lowercase and use underscores instead of spaces, making it compatible with most dashboard tools and improving data accessibility.
+
+
+### `create_visual_summary_csv(csv_file)`
+**Purpose:**
+Creates a visual summary of the data from a CSV file.
+**Input:**
+`csv_file` (string): The path to the CSV file to be summarized.
+**Output:**
+None. This function likely generates a visual representation (e.g., a plot or chart) and saves it to a file, but it does not return any value.
 ---
 
 ## 3️⃣ DevOps Workflow

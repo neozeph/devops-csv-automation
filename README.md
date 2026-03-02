@@ -170,3 +170,62 @@ Clean Dataset Generated (output/)
         ↓
 Export / Dashboard Ready Output
 ```
+
+## Testing
+
+This project incorporates several types of testing to ensure reliability and data integrity:
+
+*   **Unit Testing:**  `tests/test_processing.py` validates individual functions in `src/processing.py`.
+*   **Integration Testing:** `tests/test_main.py` tests the interaction between different parts of the pipeline.
+*   **Data Validation:** `src/validate.py` validates the generated visual summary.
+*   **Linting and Formatting:** `flake8` and `black` ensure code quality and style.
+*   **Security Scanning:** `bandit` and `safety` scan for potential security vulnerabilities.
+
+These tests are automatically run as part of the CI/CD pipeline to catch issues early.
+
+## Diagrams
+
+### Data Flow Diagram
+
+This diagram illustrates the flow of data through the processing pipeline.
+
+```mermaid
+graph LR
+    A[Input CSV Data] --> B(Data Cleaning)
+    B --> C(Data Formatting)
+    C --> D(Trend Analysis)
+    D --> E(Visual Summary Generation)
+    E --> F[Output Files]
+```
+
+### CI/CD Pipeline Diagram
+
+This diagram illustrates the automated CI/CD pipeline.
+
+```mermaid
+graph LR
+    A[Code Change] --> B{GitHub}
+    B --> C(CI Pipeline Triggered)
+    C --> D{Linting}
+    C --> E{Testing}
+    D --> F{Security Scan}
+    E --> F
+    F --> G{Validation}
+    G -- Pass --> H(Automated Processing)
+    H --> I[Output Data]
+    G -- Fail --> J[Notify Developers]
+```
+
+## 👥 Team Roles
+
+### 🛠️ DevOps Engineer (Josef Alanrey Soriente)
+Handles CI/CD, repository structure, and automation. Sets up GitHub Actions (pytest, linting), manages dependencies, and ensures stable integration and builds.
+
+### 💻 Lead Developer (Marc Danielle Ipapo)
+Builds the core system logic. Develops data processing functions, handles edge cases, and maintains clean, modular code in /src.
+
+### 🧪 QA Tester (Krissa Belle Anne Mañacop)
+Ensures system reliability through pytest. Tests normal and edge cases, validates data inputs, and confirms CI pipeline correctly detects failures.
+
+### 📝 Documenter (Kalvin Brent Roxas)
+Manages project documentation. Writes README, creates diagrams, explains workflows, and prepares presentation materials.

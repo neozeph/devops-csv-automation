@@ -183,6 +183,39 @@ This project incorporates several types of testing to ensure reliability and dat
 
 These tests are automatically run as part of the CI/CD pipeline to catch issues early.
 
+## Diagrams
+
+### Data Flow Diagram
+
+This diagram illustrates the flow of data through the processing pipeline.
+
+```mermaid
+graph LR
+    A[Input CSV Data] --> B(Data Cleaning)
+    B --> C(Data Formatting)
+    C --> D(Trend Analysis)
+    D --> E(Visual Summary Generation)
+    E --> F[Output Files]
+```
+
+### CI/CD Pipeline Diagram
+
+This diagram illustrates the automated CI/CD pipeline.
+
+```mermaid
+graph LR
+    A[Code Change] --> B{GitHub}
+    B --> C(CI Pipeline Triggered)
+    C --> D{Linting}
+    C --> E{Testing}
+    D --> F{Security Scan}
+    E --> F
+    F --> G{Validation}
+    G -- Pass --> H(Automated Processing)
+    H --> I[Output Data]
+    G -- Fail --> J[Notify Developers]
+```
+
 ## 👥 Team Roles
 
 ### 🛠️ DevOps Engineer (Josef Alanrey Soriente)

@@ -1,5 +1,7 @@
 import glob
+import logging
 import os
+from datetime import datetime
 import pandas as pd
 
 try:
@@ -18,6 +20,44 @@ except ModuleNotFoundError:
         generate_trend_dataset as build_trend_dataset,
         prepare_chart_ready_data as build_chart_ready_dataset,
     )
+
+
+def setup_logging(log_dir="logs"):
+    """Configure logging to file and console."""
+    os.makedirs(log_dir, exist_ok=True)
+    
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    log_file = os.path.join(log_dir, f"pipeline_{timestamp}.log")
+    
+    # Create logger
+    logger = logging.getLogger("csv_pipeline")
+    logger.setLevel(logging.DEBUG)
+    
+    # File handler
+    file_handler = logging.FileHandler(log_file)
+    file_handler.setLevel(logging.DEBUG)
+    
+    # Console handler
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.INFO)
+    
+    # Formatter
+    formatter = logging.Formatter(
+        '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S'
+    )
+    file_handler.setFormatter(formatter)
+    console_handler.setFormatter(formatter)
+    
+    # Add handlers
+    logger.addHandler(file_handler)
+    logger.addHandler(console_handler)
+    
+    return logger
+
+
+# Initialize logger
+logger = setup_logging()
 
 
 def prepare_chart_ready_data(df, output_dir):
@@ -51,30 +91,42 @@ def create_visual_summary_csv(df, output_dir):
     output_path = os.path.join(output_dir, "05_summary.svg")
     with open(output_path, "w", encoding="utf-8") as svg_file:
         svg_file.write(summary_svg)
-    print(f"Saved: {output_path}")
+    logger.debug(f"Saved: {output_path}")
 
 
 def save_file(df, filename, output_dir, include_index=False):
     """Helper to save a dataframe to the output directory."""
     output_path = os.path.join(output_dir, filename)
     df.to_csv(output_path, index=include_index)
-    print(f"Saved: {output_path}")
+    logger.debug(f"Saved: {output_path}")
 
 
 def run_pipeline(input_dir, output_dir):
     """Process every CSV file in input_dir and write transformed outputs."""
+    logger.info("="*60)
+    logger.info("Starting CSV Automation Pipeline")
+    logger.info(f"Input directory: {input_dir}")
+    logger.info(f"Output directory: {output_dir}")
+    logger.info("="*60)
+    
     os.makedirs(output_dir, exist_ok=True)
     csv_files = glob.glob(os.path.join(input_dir, "*.csv"))
 
     if not csv_files:
-        print("No CSV files found in input/ folder.")
+        logger.warning("No CSV files found in input/ folder.")
         return
+
+    logger.info(f"Found {len(csv_files)} CSV file(s) to process")
+    
+    processed_count = 0
+    failed_count = 0
 
     for filepath in csv_files:
         filename = os.path.basename(filepath)
         try:
-            print(f"Processing {filename}...")
+            logger.info(f"Processing {filename}...")
             df = pd.read_csv(filepath)
+            logger.debug(f"  - Rows: {len(df)}, Columns: {len(df.columns)}")
 
             file_stem = os.path.splitext(filename)[0]
             file_output_dir = os.path.join(output_dir, file_stem)
@@ -85,5 +137,13 @@ def run_pipeline(input_dir, output_dir):
             generate_trend_dataset(df_clean, file_output_dir)
             format_for_dashboard(df_clean, file_output_dir)
             create_visual_summary_csv(df, file_output_dir)
+            
+            logger.info(f"✓ Successfully processed {filename}")
+            processed_count += 1
         except Exception as exc:
-            print(f"Failed to process {filename}: {exc}")
+            logger.error(f"✗ Failed to process {filename}: {exc}", exc_info=True)
+            failed_count += 1
+    
+    logger.info("="*60)
+    logger.info(f"Pipeline Complete - Processed: {processed_count}, Failed: {failed_count}")
+    logger.info("="*60)

@@ -4,31 +4,59 @@ import pandas as pd
 
 
 def prepare_chart_ready_data(df):
-    """Return rows with missing values removed."""
+    """Return dataframe with missing values filled intelligently."""
     _ensure_dataframe(df)
-    return df.dropna()
+    df_clean = df.copy()
+    
+    # Fill missing values based on column type
+    for col in df_clean.columns:
+        if df_clean[col].isna().any():
+            if pd.api.types.is_numeric_dtype(df_clean[col]):
+                # Fill numeric columns with 0
+                df_clean[col] = df_clean[col].fillna(0)
+            elif pd.api.types.is_datetime64_any_dtype(df_clean[col]):
+                # Fill datetime columns with epoch
+                df_clean[col] = df_clean[col].fillna(pd.to_datetime('1970-01-01'))
+            elif "date" in col.lower() or "time" in col.lower():
+                # Fill date/time string columns with a placeholder date string
+                df_clean[col] = df_clean[col].fillna("1970-01-01")
+            else:
+                # Fill string columns with "Unknown"
+                df_clean[col] = df_clean[col].fillna("Unknown")
+    
+    return df_clean
 
 
 def export_plot_dataset(df):
     """Return numeric columns suitable for plotting."""
     _ensure_dataframe(df)
-    return df.select_dtypes(include=["number"])
+    df_numeric = df.select_dtypes(include=["number"])
+    # Fill NaN values in numeric columns with 0
+    df_numeric = df_numeric.fillna(0)
+    return df_numeric
 
 
 def generate_trend_dataset(df):
-    """Return dataframe sorted by the first detected date/time column."""
+    """Return dataframe sorted by the first detected date/time column, handling missing dates gracefully."""
     _ensure_dataframe(df)
     df_trend = df.copy()
+    sorted_successfully = False
 
     for col in df_trend.columns:
         if "date" in col.lower() or "time" in col.lower():
             try:
-                df_trend[col] = pd.to_datetime(df_trend[col])
+                # Use coerce to convert invalid dates to NaT instead of raising an error
+                df_trend[col] = pd.to_datetime(df_trend[col], errors='coerce')
+                # Fill NaT values with epoch date so sorting still works
+                df_trend[col] = df_trend[col].fillna(pd.to_datetime('1970-01-01'))
                 df_trend = df_trend.sort_values(by=col)
+                sorted_successfully = True
                 break
-            except (ValueError, TypeError):
+            except (ValueError, TypeError) as e:
+                # Log the error but continue trying other columns
                 continue
-
+    
+    # If no date column was found or all failed, return unsorted but valid data
     return df_trend
 
 
@@ -217,9 +245,10 @@ def _dashboard_svg(df, df_numeric):
                 f'<polyline points="{polyline_points}" fill="none" stroke="#f59e0b" '
                 'stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>'
             )
+            trend_col_name = escape(str(series.name)[:20])
             svg.append(
                 f'<text x="{chart_x}" y="{chart_y + chart_h + 20}" font-size="12" fill="#cbd5e1">'
-                "First Numeric Column</text>"
+                f"Trend: {trend_col_name}</text>"
             )
             svg.append(
                 f'<text x="{chart_x + chart_w}" y="{chart_y + chart_h + 20}" '

@@ -37,7 +37,7 @@
 <text x="812" y="266" font-size="20" font-weight="600" fill="#e2e8f0">Trend Preview</text>
 <rect x="816" y="286" width="336" height="192" rx="12" fill="#0a1528" stroke="#2a3a56"/>
 <polyline points="816.00,478.00 1152.00,286.00" fill="none" stroke="#f59e0b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="816" y="498" font-size="12" fill="#cbd5e1">First Numeric Column</text>
+<text x="816" y="498" font-size="12" fill="#cbd5e1">Trend: quantity</text>
 <text x="1152" y="498" font-size="12" fill="#cbd5e1" text-anchor="end">Min 5  Max 20</text>
 <rect x="24" y="534" width="1152" height="220" rx="20" fill="#0f1b2e" stroke="#2a3a56"/>
 <circle cx="200" cy="560" r="11" fill="#22d3ee" opacity="0.2"/>

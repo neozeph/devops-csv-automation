@@ -31,13 +31,13 @@
 <rect x="24" y="232" width="744" height="280" rx="20" fill="#0f1b2e" stroke="#2a3a56"/>
 <text x="44" y="266" font-size="20" font-weight="600" fill="#e2e8f0">Column Mean Values</text>
 <rect x="377.00" y="298.00" width="58.00" height="176.00" rx="9" fill="url(#bar)"/>
-<text x="406.00" y="492" font-size="12" fill="#cbd5e1" text-anchor="middle">grade</text>
+<text x="406.00" y="492" font-size="12" fill="#cbd5e1" text-anchor="middle">Grade</text>
 <text x="406.00" y="292.00" font-size="12" fill="#e2e8f0" text-anchor="middle">74.72</text>
 <rect x="792" y="232" width="384" height="280" rx="20" fill="#0f1b2e" stroke="#2a3a56"/>
 <text x="812" y="266" font-size="20" font-weight="600" fill="#e2e8f0">Trend Preview</text>
 <rect x="816" y="286" width="336" height="192" rx="12" fill="#0a1528" stroke="#2a3a56"/>
 <polyline points="816.00,402.87 824.62,311.04 833.23,356.96 841.85,452.96 850.46,411.22 859.08,457.13 867.69,373.65 876.31,344.43 884.92,298.52 893.54,365.30 902.15,415.39 910.77,402.87 919.38,298.52 928.00,286.00 936.62,415.39 945.23,365.30 953.85,444.61 962.46,394.52 971.08,336.09 979.69,436.26 988.31,369.48 996.92,294.35 1005.54,390.35 1014.15,419.57 1022.77,352.78 1031.38,432.09 1040.00,298.52 1048.62,478.00 1057.23,427.91 1065.85,411.22 1074.46,323.57 1083.08,478.00 1091.69,448.78 1100.31,361.13 1108.92,344.43 1117.54,352.78 1126.15,365.30 1134.77,306.87 1143.38,311.04 1152.00,302.70" fill="none" stroke="#f59e0b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="816" y="498" font-size="12" fill="#cbd5e1">Trend: grade</text>
+<text x="816" y="498" font-size="12" fill="#cbd5e1">Trend: Grade</text>
 <text x="1152" y="498" font-size="12" fill="#cbd5e1" text-anchor="end">Min 53  Max 99</text>
 <rect x="24" y="534" width="1152" height="220" rx="20" fill="#0f1b2e" stroke="#2a3a56"/>
 <circle cx="200" cy="560" r="11" fill="#22d3ee" opacity="0.2"/>
@@ -51,7 +51,7 @@
 <circle cx="1122.0" cy="630" r="11" fill="#22d3ee" opacity="0.18"/>
 <line x1="1117.0" y1="632" x2="1122.0" y2="627" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"/>
 <line x1="1122.0" y1="627" x2="1127.0" y2="631" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"/>
-<text x="58.00" y="636" font-size="15" font-weight="600" fill="#f8fafc">grade</text>
+<text x="58.00" y="636" font-size="15" font-weight="600" fill="#f8fafc">Grade</text>
 <circle cx="70.0" cy="653" r="8.5" fill="#22d3ee" opacity="0.22"/>
 <line x1="65.0" y1="653" x2="75.0" y2="653" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"/>
 <text x="88.00" y="662" font-size="14" fill="#94a3b8">Mean</text>

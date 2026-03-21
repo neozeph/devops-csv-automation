@@ -43,7 +43,7 @@
 <text x="812" y="266" font-size="20" font-weight="600" fill="#e2e8f0">Trend Preview</text>
 <rect x="816" y="286" width="336" height="192" rx="12" fill="#0a1528" stroke="#2a3a56"/>
 <polyline points="816.00,478.00 928.00,414.00 1040.00,350.00 1152.00,286.00" fill="none" stroke="#f59e0b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="816" y="498" font-size="12" fill="#cbd5e1">Trend: Employee ID</text>
+<text x="816" y="498" font-size="12" fill="#cbd5e1">Trend: Employee Id</text>
 <text x="1152" y="498" font-size="12" fill="#cbd5e1" text-anchor="end">Min 1,001  Max 1,004</text>
 <rect x="24" y="534" width="1152" height="220" rx="20" fill="#0f1b2e" stroke="#2a3a56"/>
 <circle cx="200" cy="560" r="11" fill="#22d3ee" opacity="0.2"/>
@@ -57,7 +57,7 @@
 <circle cx="380.6666666666667" cy="630" r="11" fill="#22d3ee" opacity="0.18"/>
 <line x1="375.6666666666667" y1="632" x2="380.6666666666667" y2="627" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"/>
 <line x1="380.6666666666667" y1="627" x2="385.6666666666667" y2="631" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"/>
-<text x="58.00" y="636" font-size="15" font-weight="600" fill="#f8fafc">Employee ID</text>
+<text x="58.00" y="636" font-size="15" font-weight="600" fill="#f8fafc">Employee Id</text>
 <circle cx="70.0" cy="653" r="8.5" fill="#22d3ee" opacity="0.22"/>
 <line x1="65.0" y1="653" x2="75.0" y2="653" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"/>
 <text x="88.00" y="662" font-size="14" fill="#94a3b8">Mean</text>

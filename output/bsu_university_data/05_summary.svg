@@ -31,25 +31,25 @@
 <rect x="24" y="232" width="744" height="280" rx="20" fill="#0f1b2e" stroke="#2a3a56"/>
 <text x="44" y="266" font-size="20" font-weight="600" fill="#e2e8f0">Column Mean Values</text>
 <rect x="113.00" y="298.00" width="58.00" height="176.00" rx="9" fill="url(#bar)"/>
-<text x="142.00" y="492" font-size="12" fill="#cbd5e1" text-anchor="middle">Tuition_US</text>
+<text x="142.00" y="492" font-size="12" fill="#cbd5e1" text-anchor="middle">Tuition Us</text>
 <text x="142.00" y="292.00" font-size="12" fill="#e2e8f0" text-anchor="middle">1,134</text>
 <rect x="245.00" y="429.18" width="58.00" height="44.82" rx="9" fill="url(#bar)"/>
-<text x="274.00" y="492" font-size="12" fill="#cbd5e1" text-anchor="middle">Enrolled_S</text>
+<text x="274.00" y="492" font-size="12" fill="#cbd5e1" text-anchor="middle">Enrolled S</text>
 <text x="274.00" y="423.18" font-size="12" fill="#e2e8f0" text-anchor="middle">288.8</text>
 <rect x="377.00" y="459.64" width="58.00" height="14.36" rx="9" fill="url(#bar)"/>
 <text x="406.00" y="492" font-size="12" fill="#cbd5e1" text-anchor="middle">Scholarshi</text>
 <text x="406.00" y="453.64" font-size="12" fill="#e2e8f0" text-anchor="middle">92.5</text>
 <rect x="509.00" y="473.61" width="58.00" height="0.39" rx="9" fill="url(#bar)"/>
-<text x="538.00" y="492" font-size="12" fill="#cbd5e1" text-anchor="middle">Average_GP</text>
+<text x="538.00" y="492" font-size="12" fill="#cbd5e1" text-anchor="middle">Average Gp</text>
 <text x="538.00" y="467.61" font-size="12" fill="#e2e8f0" text-anchor="middle">2.518</text>
 <rect x="641.00" y="473.64" width="58.00" height="0.36" rx="9" fill="url(#bar)"/>
-<text x="670.00" y="492" font-size="12" fill="#cbd5e1" text-anchor="middle">Year_Level</text>
+<text x="670.00" y="492" font-size="12" fill="#cbd5e1" text-anchor="middle">Year Level</text>
 <text x="670.00" y="467.64" font-size="12" fill="#e2e8f0" text-anchor="middle">2.3</text>
 <rect x="792" y="232" width="384" height="280" rx="20" fill="#0f1b2e" stroke="#2a3a56"/>
 <text x="812" y="266" font-size="20" font-weight="600" fill="#e2e8f0">Trend Preview</text>
 <rect x="816" y="286" width="336" height="192" rx="12" fill="#0a1528" stroke="#2a3a56"/>
 <polyline points="816.00,478.00 853.33,414.00 890.67,350.00 928.00,286.00 965.33,414.00 1002.67,478.00 1040.00,350.00 1077.33,414.00 1114.67,286.00 1152.00,478.00" fill="none" stroke="#f59e0b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="816" y="498" font-size="12" fill="#cbd5e1">Trend: Year_Level</text>
+<text x="816" y="498" font-size="12" fill="#cbd5e1">Trend: Year Level</text>
 <text x="1152" y="498" font-size="12" fill="#cbd5e1" text-anchor="end">Min 1  Max 4</text>
 <rect x="24" y="534" width="1152" height="220" rx="20" fill="#0f1b2e" stroke="#2a3a56"/>
 <circle cx="200" cy="560" r="11" fill="#22d3ee" opacity="0.2"/>
@@ -63,7 +63,7 @@
 <circle cx="288.0" cy="630" r="11" fill="#22d3ee" opacity="0.18"/>
 <line x1="283.0" y1="632" x2="288.0" y2="627" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"/>
 <line x1="288.0" y1="627" x2="293.0" y2="631" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"/>
-<text x="58.00" y="636" font-size="15" font-weight="600" fill="#f8fafc">Year_Level</text>
+<text x="58.00" y="636" font-size="15" font-weight="600" fill="#f8fafc">Year Level</text>
 <circle cx="70.0" cy="653" r="8.5" fill="#22d3ee" opacity="0.22"/>
 <line x1="65.0" y1="653" x2="75.0" y2="653" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"/>
 <text x="88.00" y="662" font-size="14" fill="#94a3b8">Mean</text>
@@ -80,7 +80,7 @@
 <circle cx="566.0" cy="630" r="11" fill="#34d399" opacity="0.18"/>
 <line x1="561.0" y1="632" x2="566.0" y2="627" stroke="#34d399" stroke-width="2.4" stroke-linecap="round"/>
 <line x1="566.0" y1="627" x2="571.0" y2="631" stroke="#34d399" stroke-width="2.4" stroke-linecap="round"/>
-<text x="336.00" y="636" font-size="15" font-weight="600" fill="#f8fafc">Enrolled_Students</text>
+<text x="336.00" y="636" font-size="15" font-weight="600" fill="#f8fafc">Enrolled Students</text>
 <circle cx="348.0" cy="653" r="8.5" fill="#22d3ee" opacity="0.22"/>
 <line x1="343.0" y1="653" x2="353.0" y2="653" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"/>
 <text x="366.00" y="662" font-size="14" fill="#94a3b8">Mean</text>
@@ -97,7 +97,7 @@
 <circle cx="844.0" cy="630" r="11" fill="#f59e0b" opacity="0.18"/>
 <line x1="839.0" y1="632" x2="844.0" y2="627" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
 <line x1="844.0" y1="627" x2="849.0" y2="631" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round"/>
-<text x="614.00" y="636" font-size="15" font-weight="600" fill="#f8fafc">Average_GPA</text>
+<text x="614.00" y="636" font-size="15" font-weight="600" fill="#f8fafc">Average Gpa</text>
 <circle cx="626.0" cy="653" r="8.5" fill="#22d3ee" opacity="0.22"/>
 <line x1="621.0" y1="653" x2="631.0" y2="653" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"/>
 <text x="644.00" y="662" font-size="14" fill="#94a3b8">Mean</text>
@@ -114,7 +114,7 @@
 <circle cx="1122.0" cy="630" r="11" fill="#a78bfa" opacity="0.18"/>
 <line x1="1117.0" y1="632" x2="1122.0" y2="627" stroke="#a78bfa" stroke-width="2.4" stroke-linecap="round"/>
 <line x1="1122.0" y1="627" x2="1127.0" y2="631" stroke="#a78bfa" stroke-width="2.4" stroke-linecap="round"/>
-<text x="892.00" y="636" font-size="15" font-weight="600" fill="#f8fafc">Tuition_USD</text>
+<text x="892.00" y="636" font-size="15" font-weight="600" fill="#f8fafc">Tuition Usd</text>
 <circle cx="904.0" cy="653" r="8.5" fill="#22d3ee" opacity="0.22"/>
 <line x1="899.0" y1="653" x2="909.0" y2="653" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round"/>
 <text x="922.00" y="662" font-size="14" fill="#94a3b8">Mean</text>

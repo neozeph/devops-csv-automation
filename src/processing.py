@@ -196,7 +196,7 @@ def _dashboard_svg(df, df_numeric):
             svg.append(
                 f'<text x="{x + (bar_w / 2):.2f}" y="{bar_area_y + bar_area_h + 18}" '
                 'font-size="12" fill="#cbd5e1" text-anchor="middle">'
-                f"{escape(str(name)[:10])}</text>"
+                f"{_format_label(str(name)[:10])}</text>"
             )
             svg.append(
                 f'<text x="{x + (bar_w / 2):.2f}" y="{max(top_y + 52, y - 6):.2f}" '
@@ -245,7 +245,7 @@ def _dashboard_svg(df, df_numeric):
                 f'<polyline points="{polyline_points}" fill="none" stroke="#f59e0b" '
                 'stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>'
             )
-            trend_col_name = escape(str(series.name)[:20])
+            trend_col_name = _format_label(str(series.name)[:20])
             svg.append(
                 f'<text x="{chart_x}" y="{chart_y + chart_h + 20}" font-size="12" fill="#cbd5e1">'
                 f"Trend: {trend_col_name}</text>"
@@ -306,7 +306,7 @@ def _dashboard_svg(df, df_numeric):
             svg.extend(_quick_metric_icon(x + col_w - 34, start_y - 6, i))
             svg.append(
                 f'<text x="{x + 14:.2f}" y="{start_y}" font-size="15" font-weight="600" fill="#f8fafc">'
-                f"{escape(str(col_name)[:24])}</text>"
+                f"{_format_label(str(col_name)[:24])}</text>"
             )
 
             inner_x = x + 14
@@ -351,6 +351,17 @@ def _fmt_num(value):
     if abs(val) >= 10:
         return f"{val:.2f}".rstrip("0").rstrip(".")
     return f"{val:.3f}".rstrip("0").rstrip(".")
+
+
+def _format_label(text):
+    """Format text to appear formal: capitalize and replace underscores with spaces."""
+    if not isinstance(text, str):
+        text = str(text)
+    # Replace underscores with spaces
+    text = text.replace("_", " ")
+    # Title case: capitalize first letter of each word
+    text = text.title()
+    return escape(text)
 
 
 def _ensure_dataframe(df):

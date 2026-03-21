@@ -71,6 +71,14 @@ def test_create_visual_summary_output():
     assert "mean" in summary.lower()
 
 
+def test_create_visual_summary_handles_all_nan_numeric_column():
+    df = pd.DataFrame({"A": [float("nan"), float("nan")], "Label": ["x", "y"]})
+
+    summary = create_visual_summary(df)
+    assert 'height="nan"' not in summary
+    assert 'y="nan"' not in summary
+
+
 @pytest.mark.parametrize(
     "func",
     [

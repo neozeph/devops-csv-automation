@@ -114,6 +114,7 @@ def run_pipeline(input_dir, output_dir):
 
     if not csv_files:
         logger.warning("No CSV files found in input/ folder.")
+        print("No CSV files found")
         return
 
     logger.info(f"Found {len(csv_files)} CSV file(s) to process")
@@ -142,6 +143,7 @@ def run_pipeline(input_dir, output_dir):
             processed_count += 1
         except Exception as exc:
             logger.error(f"✗ Failed to process {filename}: {exc}", exc_info=True)
+            print(f"Failed to process {filename}: {exc}")
             failed_count += 1
 
     logger.info("=" * 60)

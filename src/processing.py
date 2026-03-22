@@ -7,7 +7,7 @@ def prepare_chart_ready_data(df):
     """Return dataframe with missing values filled intelligently."""
     _ensure_dataframe(df)
     df_clean = df.copy()
-    
+
     # Fill missing values based on column type
     for col in df_clean.columns:
         if df_clean[col].isna().any():
@@ -16,14 +16,14 @@ def prepare_chart_ready_data(df):
                 df_clean[col] = df_clean[col].fillna(0)
             elif pd.api.types.is_datetime64_any_dtype(df_clean[col]):
                 # Fill datetime columns with epoch
-                df_clean[col] = df_clean[col].fillna(pd.to_datetime('1970-01-01'))
+                df_clean[col] = df_clean[col].fillna(pd.to_datetime("1970-01-01"))
             elif "date" in col.lower() or "time" in col.lower():
                 # Fill date/time string columns with a placeholder date string
                 df_clean[col] = df_clean[col].fillna("1970-01-01")
             else:
                 # Fill string columns with "Unknown"
                 df_clean[col] = df_clean[col].fillna("Unknown")
-    
+
     return df_clean
 
 
@@ -46,16 +46,16 @@ def generate_trend_dataset(df):
         if "date" in col.lower() or "time" in col.lower():
             try:
                 # Use coerce to convert invalid dates to NaT instead of raising an error
-                df_trend[col] = pd.to_datetime(df_trend[col], errors='coerce')
+                df_trend[col] = pd.to_datetime(df_trend[col], errors="coerce")
                 # Fill NaT values with epoch date so sorting still works
-                df_trend[col] = df_trend[col].fillna(pd.to_datetime('1970-01-01'))
+                df_trend[col] = df_trend[col].fillna(pd.to_datetime("1970-01-01"))
                 df_trend = df_trend.sort_values(by=col)
                 sorted_successfully = True
                 break
             except (ValueError, TypeError) as e:
                 # Log the error but continue trying other columns
                 continue
-    
+
     # If no date column was found or all failed, return unsorted but valid data
     return df_trend
 

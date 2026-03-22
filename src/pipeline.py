@@ -25,34 +25,34 @@ except ModuleNotFoundError:
 def setup_logging(log_dir="logs"):
     """Configure logging to file and console."""
     os.makedirs(log_dir, exist_ok=True)
-    
+
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     log_file = os.path.join(log_dir, f"pipeline_{timestamp}.log")
-    
+
     # Create logger
     logger = logging.getLogger("csv_pipeline")
     logger.setLevel(logging.DEBUG)
-    
+
     # File handler
     file_handler = logging.FileHandler(log_file)
     file_handler.setLevel(logging.DEBUG)
-    
+
     # Console handler
     console_handler = logging.StreamHandler()
     console_handler.setLevel(logging.INFO)
-    
+
     # Formatter
     formatter = logging.Formatter(
-        '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-        datefmt='%Y-%m-%d %H:%M:%S'
+        "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
     )
     file_handler.setFormatter(formatter)
     console_handler.setFormatter(formatter)
-    
+
     # Add handlers
     logger.addHandler(file_handler)
     logger.addHandler(console_handler)
-    
+
     return logger
 
 
@@ -103,12 +103,12 @@ def save_file(df, filename, output_dir, include_index=False):
 
 def run_pipeline(input_dir, output_dir):
     """Process every CSV file in input_dir and write transformed outputs."""
-    logger.info("="*60)
+    logger.info("=" * 60)
     logger.info("Starting CSV Automation Pipeline")
     logger.info(f"Input directory: {input_dir}")
     logger.info(f"Output directory: {output_dir}")
-    logger.info("="*60)
-    
+    logger.info("=" * 60)
+
     os.makedirs(output_dir, exist_ok=True)
     csv_files = glob.glob(os.path.join(input_dir, "*.csv"))
 
@@ -117,7 +117,7 @@ def run_pipeline(input_dir, output_dir):
         return
 
     logger.info(f"Found {len(csv_files)} CSV file(s) to process")
-    
+
     processed_count = 0
     failed_count = 0
 
@@ -137,13 +137,15 @@ def run_pipeline(input_dir, output_dir):
             generate_trend_dataset(df_clean, file_output_dir)
             format_for_dashboard(df_clean, file_output_dir)
             create_visual_summary_csv(df, file_output_dir)
-            
+
             logger.info(f"✓ Successfully processed {filename}")
             processed_count += 1
         except Exception as exc:
             logger.error(f"✗ Failed to process {filename}: {exc}", exc_info=True)
             failed_count += 1
-    
-    logger.info("="*60)
-    logger.info(f"Pipeline Complete - Processed: {processed_count}, Failed: {failed_count}")
-    logger.info("="*60)
+
+    logger.info("=" * 60)
+    logger.info(
+        f"Pipeline Complete - Processed: {processed_count}, Failed: {failed_count}"
+    )
+    logger.info("=" * 60)

@@ -1,0 +1,28 @@
+2026-03-22 07:39:02 - csv_pipeline - INFO - ============================================================
+2026-03-22 07:39:02 - csv_pipeline - INFO - Starting CSV Automation Pipeline
+2026-03-22 07:39:02 - csv_pipeline - INFO - Input directory: input
+2026-03-22 07:39:02 - csv_pipeline - INFO - Output directory: output
+2026-03-22 07:39:02 - csv_pipeline - INFO - ============================================================
+2026-03-22 07:39:02 - csv_pipeline - INFO - Found 19 CSV file(s) to process
+2026-03-22 07:39:02 - csv_pipeline - INFO - Processing bsu_university_data.csv...
+2026-03-22 07:39:02 - csv_pipeline - DEBUG -   - Rows: 10, Columns: 10
+2026-03-22 07:39:02 - csv_pipeline - DEBUG - Saved: output\bsu_university_data\01_chart_ready.csv
+2026-03-22 07:39:02 - csv_pipeline - DEBUG - Saved: output\bsu_university_data\02_plot_dataset.csv
+2026-03-22 07:39:02 - csv_pipeline - DEBUG - Saved: output\bsu_university_data\03_trend.csv
+2026-03-22 07:39:02 - csv_pipeline - DEBUG - Saved: output\bsu_university_data\04_dashboard.csv
+2026-03-22 07:39:02 - csv_pipeline - DEBUG - Saved: output\bsu_university_data\05_summary.svg
+2026-03-22 07:39:02 - csv_pipeline - INFO - Processing customer_feedback.csv...
+2026-03-22 07:39:02 - csv_pipeline - DEBUG -   - Rows: 4, Columns: 4
+2026-03-22 07:39:02 - csv_pipeline - DEBUG - Saved: output\customer_feedback\01_chart_ready.csv
+2026-03-22 07:39:02 - csv_pipeline - DEBUG - Saved: output\customer_feedback\02_plot_dataset.csv
+2026-03-22 07:39:02 - csv_pipeline - DEBUG - Saved: output\customer_feedback\03_trend.csv
+2026-03-22 07:39:02 - csv_pipeline - DEBUG - Saved: output\customer_feedback\04_dashboard.csv
+2026-03-22 07:39:02 - csv_pipeline - DEBUG - Saved: output\customer_feedback\05_summary.svg
+2026-03-22 07:39:02 - csv_pipeline - INFO - Processing employee_records.csv...
+2026-03-22 07:39:02 - csv_pipeline - DEBUG -   - Rows: 4, Columns: 5
+2026-03-22 07:39:02 - csv_pipeline - DEBUG - Saved: output\employee_records\01_chart_ready.csv
+2026-03-22 07:39:02 - csv_pipeline - DEBUG - Saved: output\employee_records\02_plot_dataset.csv
+2026-03-22 07:39:02 - csv_pipeline - DEBUG - Saved: output\employee_records\03_trend.csv
+2026-03-22 07:39:02 - csv_pipeline - DEBUG - Saved: output\employee_records\04_dashboard.csv
+2026-03-22 07:39:02 - csv_pipeline - DEBUG - Saved: output\employee_records\05_summary.svg
+2026-03-22 07:39:02 - csv_pipeline - INFO - Processing no_date_sample.csv...

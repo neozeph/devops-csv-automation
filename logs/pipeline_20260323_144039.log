@@ -1,0 +1,18 @@
+2026-03-23 14:40:39 - csv_pipeline - DEBUG - Saved: output\test_file\01_chart_ready.csv
+2026-03-23 14:40:39 - csv_pipeline - DEBUG - Saved: output\test_file\04_dashboard.csv
+2026-03-23 14:40:39 - csv_pipeline - INFO - ============================================================
+2026-03-23 14:40:39 - csv_pipeline - INFO - Starting CSV Automation Pipeline
+2026-03-23 14:40:39 - csv_pipeline - INFO - Input directory: input
+2026-03-23 14:40:39 - csv_pipeline - INFO - Output directory: output
+2026-03-23 14:40:39 - csv_pipeline - INFO - ============================================================
+2026-03-23 14:40:39 - csv_pipeline - INFO - Found 1 CSV file(s) to process
+2026-03-23 14:40:39 - csv_pipeline - INFO - Processing corrupt.csv...
+2026-03-23 14:40:39 - csv_pipeline - INFO - ============================================================
+2026-03-23 14:40:39 - csv_pipeline - INFO - Pipeline Complete - Processed: 0, Failed: 1
+2026-03-23 14:40:39 - csv_pipeline - INFO - ============================================================
+2026-03-23 14:40:39 - csv_pipeline - INFO - ============================================================
+2026-03-23 14:40:39 - csv_pipeline - INFO - Starting CSV Automation Pipeline
+2026-03-23 14:40:39 - csv_pipeline - INFO - Input directory: input
+2026-03-23 14:40:39 - csv_pipeline - INFO - Output directory: output
+2026-03-23 14:40:39 - csv_pipeline - INFO - ============================================================
+2026-03-23 14:40:39 - csv_pipeline - WARNING - No CSV files found in input/ folder.

@@ -6,6 +6,13 @@ import pandas as pd
 
 def validate_visual_summary(df, output_dir):
     """Validate that the generated SVG matches the input dataframe stats."""
+    # Apply same conversions as pipeline does
+    for col in df.columns:
+        if df[col].dtype in ("object", "str"):
+            numeric_col = pd.to_numeric(df[col], errors="coerce")
+            if len(df) > 0 and numeric_col.notna().sum() / len(df) > 0.5:
+                df[col] = numeric_col
+
     svg_path = os.path.join(output_dir, "05_summary.svg")
     if not os.path.exists(svg_path):
         raise FileNotFoundError(f"Validation failed: {svg_path} not found.")

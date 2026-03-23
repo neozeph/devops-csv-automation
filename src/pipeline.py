@@ -127,6 +127,13 @@ def run_pipeline(input_dir, output_dir):
         try:
             logger.info(f"Processing {filename}...")
             df = pd.read_csv(filepath)
+            # Convert string columns that are mostly numeric to actual numeric types
+            for col in df.columns:
+                if df[col].dtype in ("object", "str"):
+                    numeric_col = pd.to_numeric(df[col], errors="coerce")
+                    # If most values converted successfully (>50%), use the numeric version
+                    if numeric_col.notna().sum() / len(df) > 0.5:
+                        df[col] = numeric_col
             logger.debug(f"  - Rows: {len(df)}, Columns: {len(df.columns)}")
 
             file_stem = os.path.splitext(filename)[0]

@@ -201,8 +201,16 @@ def _dashboard_svg(df, df_numeric):
     )
 
     if not df_numeric.empty:
-        series = df_numeric.iloc[:, 0].dropna().head(40)
-        if len(series) > 1:
+        # Search numeric columns left-to-right for the first series with >1 non-NaN points.
+        selected_series = None
+        for col_idx in range(df_numeric.shape[1]):
+            candidate = df_numeric.iloc[:, col_idx].dropna()
+            if len(candidate) > 1:
+                selected_series = candidate.head(40)
+                break
+
+        if selected_series is not None and len(selected_series) > 1:
+            series = selected_series
             chart_x = right_x + 24
             chart_y = top_y + 54
             chart_w = right_w - 48

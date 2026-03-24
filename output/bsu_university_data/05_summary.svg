@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" font-family="Poppins, Segoe UI, Arial, sans-serif">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#060b17"/><stop offset="100%" stop-color="#111b30"/></linearGradient><linearGradient id="bar" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2dd4bf"/><stop offset="100%" stop-color="#0ea5e9"/></linearGradient></defs>
+<rect width="1200" height="760" fill="url(#bg)"/>
+<circle cx="1080" cy="60" r="160" fill="#22d3ee" opacity="0.08"/>
+<circle cx="980" cy="20" r="120" fill="#34d399" opacity="0.07"/>
+<text x="24" y="34" font-size="34" font-weight="700" fill="#f8fafc">Visual Summary Dashboard</text>
+<text x="24" y="64" font-size="15" fill="#94a3b8">Automated Profile for Incoming CSV Data</text>
+<rect x="24" y="86" width="228.0" height="124" rx="18" fill="#0f1b2e" stroke="#2a3a56"/>
+<rect x="40" y="96" width="196.0" height="6" rx="3" fill="#38bdf8" opacity="0.95"/>
+<circle cx="202.0" cy="150" r="27" fill="#38bdf8" opacity="0.18"/>
+<rect x="192.0" y="140" width="20" height="20" rx="3.5" fill="none" stroke="#38bdf8" stroke-width="2.4"/>
+<line x1="192.0" y1="148" x2="212.0" y2="148" stroke="#38bdf8" stroke-width="2.4"/>
+<line x1="192.0" y1="155" x2="212.0" y2="155" stroke="#38bdf8" stroke-width="2.4"/>
+<text x="44" y="132" font-size="18" font-weight="500" fill="#94a3b8">Rows</text>
+<text x="44" y="184" font-size="46" font-weight="700" fill="#f8fafc">10</text>
+<rect x="276.0" y="86" width="228.0" height="124" rx="18" fill="#0f1b2e" stroke="#2a3a56"/>
+<rect x="292.0" y="96" width="196.0" height="6" rx="3" fill="#34d399" opacity="0.95"/>
+<circle cx="454.0" cy="150" r="27" fill="#34d399" opacity="0.18"/>
+<rect x="443.0" y="140" width="7" height="20" rx="2.2" fill="#34d399" opacity="0.95"/>
+<rect x="452.0" y="143" width="7" height="17" rx="2.2" fill="#34d399" opacity="0.8"/>
+<rect x="461.0" y="137" width="7" height="23" rx="2.2" fill="#34d399" opacity="0.65"/>
+<text x="296.0" y="132" font-size="18" font-weight="500" fill="#94a3b8">Numeric Columns</text>
+<text x="296.0" y="184" font-size="46" font-weight="700" fill="#f8fafc">5</text>
+<rect x="528" y="86" width="648" height="124" rx="18" fill="#0f1b2e" stroke="#2a3a56"/>
+<rect x="544" y="96" width="616" height="6" rx="3" fill="#f59e0b" opacity="0.95"/>
+<circle cx="1126" cy="150" r="27" fill="#f59e0b" opacity="0.18"/>
+<line x1="1116" y1="150" x2="1124" y2="158" stroke="#f59e0b" stroke-width="2.8" stroke-linecap="round"/>
+<line x1="1124" y1="158" x2="1138" y2="140" stroke="#f59e0b" stroke-width="2.8" stroke-linecap="round"/>
+<text x="548" y="132" font-size="18" font-weight="500" fill="#94a3b8">Data Completeness</text>
+<text x="548" y="184" font-size="46" font-weight="700" fill="#f8fafc">98.0%</text>
+<rect x="24" y="232" width="480" height="280" rx="20" fill="#0f1b2e" stroke="#2a3a56"/>
+<text x="44" y="266" font-size="20" font-weight="600" fill="#e2e8f0">Column Mean Values</text>
+<rect x="91.05" y="298.00" width="49.10" height="176.00" rx="9" fill="url(#bar)"/>
+<text x="115.60" y="492" font-size="12" fill="#cbd5e1" text-anchor="middle">Tuition Us</text>
+<text x="115.60" y="292.00" font-size="12" fill="#e2e8f0" text-anchor="middle">1,134</text>
+<rect x="170.25" y="429.18" width="49.10" height="44.82" rx="9" fill="url(#bar)"/>
+<text x="194.80" y="492" font-size="12" fill="#cbd5e1" text-anchor="middle">Enrolled S</text>
+<text x="194.80" y="423.18" font-size="12" fill="#e2e8f0" text-anchor="middle">288.8</text>
+<rect x="249.45" y="459.64" width="49.10" height="14.36" rx="9" fill="url(#bar)"/>
+<text x="274.00" y="492" font-size="12" fill="#cbd5e1" text-anchor="middle">Scholarshi</text>
+<text x="274.00" y="453.64" font-size="12" fill="#e2e8f0" text-anchor="middle">92.5</text>
+<rect x="328.65" y="473.61" width="49.10" height="0.39" rx="9" fill="url(#bar)"/>
+<text x="353.20" y="492" font-size="12" fill="#cbd5e1" text-anchor="middle">Average Gp</text>
+<text x="353.20" y="467.61" font-size="12" fill="#e2e8f0" text-anchor="middle">2.518</text>
+<rect x="407.85" y="473.64" width="49.10" height="0.36" rx="9" fill="url(#bar)"/>
+<text x="432.40" y="492" font-size="12" fill="#cbd5e1" text-anchor="middle">Year Level</text>
+<text x="432.40" y="467.64" font-size="12" fill="#e2e8f0" text-anchor="middle">2.3</text>
+<rect x="528" y="232" width="648" height="280" rx="20" fill="#0f1b2e" stroke="#2a3a56"/>
+<text x="548" y="266" font-size="20" font-weight="600" fill="#e2e8f0">Quick Stats</text>
+<circle cx="556" cy="286" r="4" fill="#f59e0b"/>
+<text x="568" y="290" font-size="13" fill="#94a3b8">Missing Cells: 2</text>
+<rect x="548.00" y="316.00" width="194.67" height="74" rx="12" fill="#0a1528" stroke="#2a3a56"/>
+<text x="560.00" y="334.00" font-size="13" font-weight="600" fill="#f8fafc">Year Level</text>
+<text x="560.00" y="356.00" font-size="11" fill="#94a3b8">Avg 2.3</text>
+<text x="560.00" y="376.00" font-size="11" fill="#cbd5e1">1 to 4</text>
+<rect x="754.67" y="316.00" width="194.67" height="74" rx="12" fill="#0a1528" stroke="#2a3a56"/>
+<text x="766.67" y="334.00" font-size="13" font-weight="600" fill="#f8fafc">Enrolled Students</text>
+<text x="766.67" y="356.00" font-size="11" fill="#94a3b8">Avg 288.8</text>
+<text x="766.67" y="376.00" font-size="11" fill="#cbd5e1">168 to 510</text>
+<rect x="961.33" y="316.00" width="194.67" height="74" rx="12" fill="#0a1528" stroke="#2a3a56"/>
+<text x="973.33" y="334.00" font-size="13" font-weight="600" fill="#f8fafc">Average Gpa</text>
+<text x="973.33" y="356.00" font-size="11" fill="#94a3b8">Avg 2.52</text>
+<text x="973.33" y="376.00" font-size="11" fill="#cbd5e1">2.28 to 2.73</text>
+<rect x="548.00" y="400.00" width="194.67" height="74" rx="12" fill="#0a1528" stroke="#2a3a56"/>
+<text x="560.00" y="418.00" font-size="13" font-weight="600" fill="#f8fafc">Tuition Usd</text>
+<text x="560.00" y="440.00" font-size="11" fill="#94a3b8">Avg 1,134</text>
+<text x="560.00" y="460.00" font-size="11" fill="#cbd5e1">900 to 1,450</text>
+<rect x="754.67" y="400.00" width="194.67" height="74" rx="12" fill="#0a1528" stroke="#2a3a56"/>
+<text x="766.67" y="418.00" font-size="13" font-weight="600" fill="#f8fafc">Scholarship Recipients</text>
+<text x="766.67" y="440.00" font-size="11" fill="#94a3b8">Avg 92.5</text>
+<text x="766.67" y="460.00" font-size="11" fill="#cbd5e1">59 to 135</text>
+<rect x="24" y="534" width="1152" height="220" rx="20" fill="#0f1b2e" stroke="#2a3a56"/>
+<text x="44" y="568" font-size="20" font-weight="600" fill="#e2e8f0">Trend Preview</text>
+<rect x="48" y="588" width="1104" height="132" rx="12" fill="#0a1528" stroke="#2a3a56"/>
+<text x="90" y="600.00" font-size="11" fill="#94a3b8" text-anchor="end" dominant-baseline="middle">4</text>
+<line x1="94" y1="600.00" x2="100" y2="600.00" stroke="#52627d" stroke-width="1.2" opacity="0.9"/>
+<line x1="100" y1="600.00" x2="1136" y2="600.00" stroke="#3a4a66" stroke-width="1.5" opacity="0.8" stroke-dasharray="5,3"/>
+<text x="90" y="627.00" font-size="11" fill="#94a3b8" text-anchor="end" dominant-baseline="middle">3.25</text>
+<line x1="94" y1="627.00" x2="100" y2="627.00" stroke="#52627d" stroke-width="1.2" opacity="0.9"/>
+<line x1="100" y1="627.00" x2="1136" y2="627.00" stroke="#3a4a66" stroke-width="1.5" opacity="0.8" stroke-dasharray="5,3"/>
+<text x="90" y="654.00" font-size="11" fill="#94a3b8" text-anchor="end" dominant-baseline="middle">2.5</text>
+<line x1="94" y1="654.00" x2="100" y2="654.00" stroke="#52627d" stroke-width="1.2" opacity="0.9"/>
+<line x1="100" y1="654.00" x2="1136" y2="654.00" stroke="#3a4a66" stroke-width="1.5" opacity="0.8" stroke-dasharray="5,3"/>
+<text x="90" y="681.00" font-size="11" fill="#94a3b8" text-anchor="end" dominant-baseline="middle">1.75</text>
+<line x1="94" y1="681.00" x2="100" y2="681.00" stroke="#52627d" stroke-width="1.2" opacity="0.9"/>
+<line x1="100" y1="681.00" x2="1136" y2="681.00" stroke="#3a4a66" stroke-width="1.5" opacity="0.8" stroke-dasharray="5,3"/>
+<text x="90" y="708.00" font-size="11" fill="#94a3b8" text-anchor="end" dominant-baseline="middle">1</text>
+<line x1="94" y1="708.00" x2="100" y2="708.00" stroke="#52627d" stroke-width="1.2" opacity="0.9"/>
+<line x1="100" y1="708.00" x2="1136" y2="708.00" stroke="#3a4a66" stroke-width="1.5" opacity="0.8" stroke-dasharray="5,3"/>
+<line x1="100" y1="600" x2="100" y2="708" stroke="#52627d" stroke-width="1.2" opacity="0.9"/>
+<polyline points="100.00,708.00 215.11,672.00 330.22,636.00 445.33,600.00 560.44,672.00 675.56,708.00 790.67,636.00 905.78,672.00 1020.89,600.00 1136.00,708.00" fill="none" stroke="#f59e0b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="100" y="740" font-size="12" fill="#cbd5e1">Trend: Year Level</text>
+<text x="1136" y="740" font-size="12" fill="#cbd5e1" text-anchor="end">Min 1  Max 4</text>
+</svg>

@@ -98,15 +98,16 @@ def _dashboard_svg(df, df_numeric):
     card_h = 124
     gap = 24
     left_x = pad
-    left_w = 744
+    left_w = 480
     panel_h = 280
     right_x = left_x + left_w + gap
     right_w = width - right_x - pad
 
     # Match KPI row width to the two-panel grid below for exact alignment.
+    kpi_w = (left_w - gap) / 2
     kpi_layout = [
-        (left_x, 360),
-        (left_x + 360 + gap, 360),
+        (left_x, kpi_w),
+        (left_x + kpi_w + gap, kpi_w),
         (right_x, right_w),
     ]
     kpis = [
@@ -197,6 +198,86 @@ def _dashboard_svg(df, df_numeric):
     )
     svg.append(
         f'<text x="{right_x + 20}" y="{top_y + 34}" font-size="20" font-weight="600" fill="#e2e8f0">'
+        "Quick Stats</text>"
+    )
+    svg.append(f'<circle cx="{right_x + 28}" cy="{top_y + 54}" r="4" fill="#f59e0b"/>')
+    svg.append(
+        f'<text x="{right_x + 40}" y="{top_y + 58}" font-size="13" fill="#94a3b8">'
+        f"Missing Cells: {missing_cells}</text>"
+    )
+
+    if not summary_df.empty:
+        all_stats_cols = list(summary_df.columns)
+        max_stats_cards = 6
+        visible_stats_cols = all_stats_cols[:max_stats_cards]
+        hidden_stats_cols = len(all_stats_cols) - len(visible_stats_cols)
+        cards_per_row = (
+            3 if len(visible_stats_cols) > 3 else max(1, len(visible_stats_cols))
+        )
+        stats_gap_x = 12
+        stats_gap_y = 10
+        start_x = right_x + 20
+        start_y = top_y + 84
+        available_w = right_w - 40 - (stats_gap_x * (cards_per_row - 1))
+        col_w = available_w / cards_per_row
+        card_h = 74
+
+        if hidden_stats_cols > 0:
+            svg.append(
+                f'<text x="{right_x + right_w - 20}" y="{top_y + 58}" font-size="12" fill="#94a3b8" text-anchor="end">'
+                f"Showing {len(visible_stats_cols)} of {len(all_stats_cols)} numeric columns</text>"
+            )
+
+        for i, col_name in enumerate(visible_stats_cols):
+            row_idx = i // cards_per_row
+            col_idx = i % cards_per_row
+            x = start_x + (col_idx * (col_w + stats_gap_x))
+            y = start_y + (row_idx * (card_h + stats_gap_y))
+            mean_val = (
+                summary_df.at["mean", col_name] if "mean" in summary_df.index else "n/a"
+            )
+            min_val = (
+                summary_df.at["min", col_name] if "min" in summary_df.index else "n/a"
+            )
+            max_val = (
+                summary_df.at["max", col_name] if "max" in summary_df.index else "n/a"
+            )
+            svg.append(
+                f'<rect x="{x:.2f}" y="{y:.2f}" width="{col_w:.2f}" height="{card_h}" rx="12" '
+                'fill="#0a1528" stroke="#2a3a56"/>'
+            )
+            svg.append(
+                f'<text x="{x + 12:.2f}" y="{y + 18:.2f}" font-size="13" font-weight="600" fill="#f8fafc">'
+                f"{_format_label(str(col_name)[:22])}</text>"
+            )
+            svg.append(
+                f'<text x="{x + 12:.2f}" y="{y + 40:.2f}" font-size="11" fill="#94a3b8">'
+                f"Avg {_fmt_num(mean_val)}</text>"
+            )
+            svg.append(
+                f'<text x="{x + 12:.2f}" y="{y + 60:.2f}" font-size="11" fill="#cbd5e1">'
+                f"{_fmt_num(min_val)} to {_fmt_num(max_val)}</text>"
+            )
+
+        if hidden_stats_cols > 0:
+            svg.append(
+                f'<text x="{right_x + 20}" y="{top_y + panel_h - 16}" font-size="11" fill="#64748b">'
+                f"+{hidden_stats_cols} more numeric columns not shown</text>"
+            )
+    else:
+        svg.append(
+            f'<text x="{right_x + 20}" y="{top_y + 90}" font-size="14" fill="#94a3b8">'
+            "No Numeric Summary Available.</text>"
+        )
+
+    bottom_y = top_y + panel_h + 22
+    bottom_h = 220
+    svg.append(
+        f'<rect x="{pad}" y="{bottom_y}" width="{width - (pad * 2)}" height="{bottom_h}" rx="20" '
+        'fill="#0f1b2e" stroke="#2a3a56"/>'
+    )
+    svg.append(
+        f'<text x="{pad + 20}" y="{bottom_y + 34}" font-size="20" font-weight="600" fill="#e2e8f0">'
         "Trend Preview</text>"
     )
 
@@ -211,19 +292,27 @@ def _dashboard_svg(df, df_numeric):
 
         if selected_series is not None and len(selected_series) > 1:
             series = selected_series
-            chart_x = right_x + 24
-            chart_y = top_y + 54
-            chart_w = right_w - 48
-            chart_h = panel_h - 88
+            chart_x = pad + 24
+            chart_y = bottom_y + 54
+            chart_w = width - (pad * 2) - 48
+            chart_h = bottom_h - 88
             s_min = float(series.min())
             s_max = float(series.max())
-            span = s_max - s_min if s_max != s_min else 1.0
+            value_span = s_max - s_min
+            span = value_span if value_span != 0 else 1.0
+            axis_label_w = 52
+            plot_pad_top = 12
+            plot_pad_right = 16
+            plot_x = chart_x + axis_label_w
+            plot_y = chart_y + plot_pad_top
+            plot_w = chart_w - axis_label_w - plot_pad_right
+            plot_h = chart_h - (plot_pad_top * 2)
 
             points = []
             for i, val in enumerate(series):
-                px = chart_x + (i * (chart_w / (len(series) - 1)))
+                px = plot_x + (i * (plot_w / (len(series) - 1)))
                 ratio = (float(val) - s_min) / span
-                py = chart_y + chart_h - (ratio * chart_h)
+                py = plot_y + plot_h - (ratio * plot_h)
                 points.append(f"{px:.2f},{py:.2f}")
             polyline_points = " ".join(points)
 
@@ -231,97 +320,53 @@ def _dashboard_svg(df, df_numeric):
                 f'<rect x="{chart_x}" y="{chart_y}" width="{chart_w}" height="{chart_h}" '
                 'rx="12" fill="#0a1528" stroke="#2a3a56"/>'
             )
+
+            # Add y-axis labels and horizontal grid lines for readability.
+            tick_count = 5
+            for tick_idx in range(tick_count):
+                tick_ratio = tick_idx / (tick_count - 1)
+                grid_y = plot_y + (tick_ratio * plot_h)
+                tick_value = s_max - (tick_ratio * value_span) if value_span else s_max
+                svg.append(
+                    f'<text x="{plot_x - 10}" y="{grid_y:.2f}" font-size="11" fill="#94a3b8" '
+                    f'text-anchor="end" dominant-baseline="middle">{_fmt_num(tick_value)}</text>'
+                )
+                svg.append(
+                    f'<line x1="{plot_x - 6}" y1="{grid_y:.2f}" x2="{plot_x}" y2="{grid_y:.2f}" '
+                    'stroke="#52627d" stroke-width="1.2" opacity="0.9"/>'
+                )
+                svg.append(
+                    f'<line x1="{plot_x}" y1="{grid_y:.2f}" x2="{plot_x + plot_w}" y2="{grid_y:.2f}" '
+                    'stroke="#3a4a66" stroke-width="1.5" opacity="0.8" stroke-dasharray="5,3"/>'
+                )
+            svg.append(
+                f'<line x1="{plot_x}" y1="{plot_y}" x2="{plot_x}" y2="{plot_y + plot_h}" '
+                'stroke="#52627d" stroke-width="1.2" opacity="0.9"/>'
+            )
+
             svg.append(
                 f'<polyline points="{polyline_points}" fill="none" stroke="#f59e0b" '
                 'stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>'
             )
             trend_col_name = _format_label(str(series.name)[:20])
             svg.append(
-                f'<text x="{chart_x}" y="{chart_y + chart_h + 20}" font-size="12" fill="#cbd5e1">'
+                f'<text x="{plot_x}" y="{chart_y + chart_h + 20}" font-size="12" fill="#cbd5e1">'
                 f"Trend: {trend_col_name}</text>"
             )
             svg.append(
-                f'<text x="{chart_x + chart_w}" y="{chart_y + chart_h + 20}" '
+                f'<text x="{plot_x + plot_w}" y="{chart_y + chart_h + 20}" '
                 'font-size="12" fill="#cbd5e1" text-anchor="end">'
                 f"Min {_fmt_num(s_min)}  Max {_fmt_num(s_max)}</text>"
             )
         else:
             svg.append(
-                f'<text x="{right_x + 20}" y="{top_y + 68}" font-size="14" fill="#94a3b8">'
+                f'<text x="{pad + 20}" y="{bottom_y + 68}" font-size="14" fill="#94a3b8">'
                 "Not Enough Points to Draw a Trend Line.</text>"
             )
     else:
         svg.append(
-            f'<text x="{right_x + 20}" y="{top_y + 68}" font-size="14" fill="#94a3b8">'
+            f'<text x="{pad + 20}" y="{bottom_y + 68}" font-size="14" fill="#94a3b8">'
             "No Numeric Columns Available for Trend Preview.</text>"
-        )
-
-    bottom_y = top_y + panel_h + 22
-    bottom_h = 220
-    svg.append(
-        f'<rect x="{pad}" y="{bottom_y}" width="{width - (pad * 2)}" height="{bottom_h}" rx="20" '
-        'fill="#0f1b2e" stroke="#2a3a56"/>'
-    )
-    svg.extend(_quick_stats_icon(pad + 176, bottom_y + 26))
-    svg.append(
-        f'<text x="{pad + 20}" y="{bottom_y + 34}" font-size="20" font-weight="600" fill="#e2e8f0">'
-        "Quick Stats</text>"
-    )
-    svg.append(f'<circle cx="{pad + 28}" cy="{bottom_y + 54}" r="4" fill="#f59e0b"/>')
-    svg.append(
-        f'<text x="{pad + 40}" y="{bottom_y + 58}" font-size="13" fill="#94a3b8">'
-        f"Missing Cells: {missing_cells}</text>"
-    )
-
-    if not summary_df.empty:
-        stats_cols = list(summary_df.columns[:4])
-        start_x = pad + 20
-        start_y = bottom_y + 102
-        col_w = (width - (pad * 2) - 40) / max(1, len(stats_cols))
-        for i, col_name in enumerate(stats_cols):
-            x = start_x + (i * col_w)
-            mean_val = (
-                summary_df.at["mean", col_name] if "mean" in summary_df.index else "n/a"
-            )
-            min_val = (
-                summary_df.at["min", col_name] if "min" in summary_df.index else "n/a"
-            )
-            max_val = (
-                summary_df.at["max", col_name] if "max" in summary_df.index else "n/a"
-            )
-            svg.append(
-                f'<rect x="{x:.2f}" y="{start_y - 26}" width="{col_w - 12:.2f}" height="122" rx="14" '
-                'fill="#0a1528" stroke="#2a3a56"/>'
-            )
-            svg.extend(_quick_metric_icon(x + col_w - 34, start_y - 6, i))
-            svg.append(
-                f'<text x="{x + 14:.2f}" y="{start_y}" font-size="15" font-weight="600" fill="#f8fafc">'
-                f"{_format_label(str(col_name)[:24])}</text>"
-            )
-
-            inner_x = x + 14
-            inner_w = col_w - 42
-            stat_w = inner_w / 3
-            stat_y = start_y + 22
-            stats = [
-                ("Mean", mean_val, "mean"),
-                ("Min", min_val, "min"),
-                ("Max", max_val, "max"),
-            ]
-            for stat_idx, (label, value, kind) in enumerate(stats):
-                sx = inner_x + (stat_idx * stat_w)
-                svg.extend(_quick_stat_icon(kind, sx + 12, stat_y - 5))
-                svg.append(
-                    f'<text x="{sx + 30:.2f}" y="{stat_y + 4}" font-size="14" fill="#94a3b8">{label}</text>'
-                )
-                svg.append(
-                    f'<text x="{sx + 30:.2f}" y="{stat_y + 28}" font-size="18" fill="#cbd5e1">'
-                    f"{_fmt_num(value)}</text>"
-                )
-    else:
-        svg.append(
-            f'<text x="{pad + 20}" y="{bottom_y + 90}" font-size="14" fill="#94a3b8">'
-            "No Numeric Summary Available.</text>"
         )
 
     svg.append("</svg>")

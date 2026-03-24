@@ -1,6 +1,0 @@
-user_id,username,email,age,country,signup_date,is_active
-1,jdoe,jdoe@example.com,25,Philippines,2024-01-15,True
-2,asmith,asmith@example.com,30,USA,2024-02-20,True
-3,mgarcia,mgarcia@example.com,28,Spain,2024-03-05,False
-4,klim,klim@example.com,35,South Korea,2024-04-10,True
-5,psantos,psantos@example.com,22,Philippines,2024-05-18,True

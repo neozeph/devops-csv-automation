@@ -1,3 +1,5 @@
+import re
+
 import pandas as pd
 import pytest
 
@@ -77,6 +79,60 @@ def test_create_visual_summary_handles_all_nan_numeric_column():
     summary = create_visual_summary(df)
     assert 'height="nan"' not in summary
     assert 'y="nan"' not in summary
+
+
+def test_create_visual_summary_places_quick_stats_above_trend_preview():
+    df = pd.DataFrame(
+        {
+            "A": [1, 2, 3, 4],
+            "B": [2, 4, 6, 8],
+            "Label": ["x", "y", "z", "w"],
+        }
+    )
+
+    summary = create_visual_summary(df)
+    quick_stats = re.search(
+        r'<text x="(?P<x>[\d.]+)" y="(?P<y>[\d.]+)"[^>]*>Quick Stats</text>',
+        summary,
+    )
+    trend_preview = re.search(
+        r'<text x="(?P<x>[\d.]+)" y="(?P<y>[\d.]+)"[^>]*>Trend Preview</text>',
+        summary,
+    )
+
+    assert quick_stats is not None
+    assert trend_preview is not None
+    assert float(quick_stats.group("x")) > float(trend_preview.group("x"))
+    assert float(quick_stats.group("y")) < float(trend_preview.group("y"))
+
+
+def test_create_visual_summary_renders_y_axis_labels_for_trend_preview():
+    df = pd.DataFrame(
+        {
+            "A": [2, 4, 6, 8],
+            "B": [1, 3, 5, 7],
+            "Label": ["x", "y", "z", "w"],
+        }
+    )
+
+    summary = create_visual_summary(df)
+    y_axis_labels = re.findall(
+        r'font-size="11" fill="#94a3b8" text-anchor="end" dominant-baseline="middle">([^<]+)</text>',
+        summary,
+    )
+
+    assert len(y_axis_labels) == 5
+    assert y_axis_labels[0] == "8"
+    assert y_axis_labels[-1] == "2"
+
+
+def test_create_visual_summary_compacts_quick_stats_for_many_numeric_columns():
+    df = pd.DataFrame({f"Metric {idx}": [idx, idx + 1, idx + 2] for idx in range(1, 9)})
+
+    summary = create_visual_summary(df)
+
+    assert "Showing 6 of 8 numeric columns" in summary
+    assert "+2 more numeric columns not shown" in summary
 
 
 @pytest.mark.parametrize(
